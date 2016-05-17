@@ -2,11 +2,12 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var dishSchema = new Schema({
-    name:  String,
-    price: Number,
-    url: String,
+    title:  String,
+    price: String,  
     category: String,
-    picture: String
+    image: String,
+    description: String,
+    uselfulness: String
 });
 
 module.exports = {

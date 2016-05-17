@@ -47,5 +47,7 @@ module.exports = function seed() {
                 console.log('seed error %s', err);
             });
         });
+        return 0;
     });
+    return 0;
 };
