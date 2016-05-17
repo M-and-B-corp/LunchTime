@@ -13,11 +13,12 @@ var express = require('express'),
 
     routes = require('./src/routes/routes.js'),
 
-    cookieParser = require('cookie-parser');
+    cookieParser = require('cookie-parser'),
+
+    parser = require('./src/parser/parser.js');
 
 //TODO: Избавиться от хардкода(сделать конфиг)
 mongoose.connect('mongodb://localhost/lenka');
-
 app.use(cookieParser());
 app.use(session({
     secret: 'appsecret',
@@ -51,6 +52,6 @@ app.use(function (req, res) {
     res.render('404');
 });
 
-var server = app.listen(process.env.PORT || 3000, '0.0.0.0', function () {
+app.listen(process.env.PORT || 3000, '0.0.0.0', function () {
     console.log('Working ' + this.port);
 });
