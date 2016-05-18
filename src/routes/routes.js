@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var servicesController = require('../controllers/services.js');
-var serviceController = require('../controllers/service.js');
+var serviceController = require('../controllers/menuPage.js');
 var passport = require('passport');
 var homeController = require('../controllers/home.js');
 var myMenu = require('../controllers/myMenu');
