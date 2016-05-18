@@ -1,6 +1,6 @@
 var ServiceModel = require('../models/service').model;
 
-module.exports = function setTime(req, res, next) {
+module.exports = function(req, res, next) {
     if (req.body.action == 'setTime') {
         var hrs = +req.body.hrs;
         var mnts = +req.body.mnts;

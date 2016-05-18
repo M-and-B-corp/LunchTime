@@ -7,7 +7,8 @@ var dishSchema = new Schema({
     category: String,
     image: String,
     description: String,
-    uselfulness: String
+    uselfulness: String,
+    _serviceId: Schema.Types.ObjectId
 });
 
 module.exports = {
