@@ -53,7 +53,6 @@ passport.use('vk',
         process.nextTick(function () {
 
             Person.findOne({vkId: profile.id}, function (err, user) {
-                console.log(profile.id);
                 if (err)
                     return done(err);
 

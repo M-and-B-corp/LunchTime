@@ -1,6 +1,6 @@
 var OrderModel = require('../models/order').model;
 
-module.exports = function HomeController(req, res, next) {
+module.exports = function(req, res, next) {
     OrderModel.find({})
         .populate("dishes")
         .populate("subscriber.dishes")
@@ -21,8 +21,7 @@ module.exports = function HomeController(req, res, next) {
 
                 return orderTime > current;
             });
-
-            console.log(orders);
+            
 
             function isSubscriber(subscribers){
                 return subscribers.some(function(subscriber){
