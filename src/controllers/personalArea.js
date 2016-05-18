@@ -5,11 +5,7 @@ module.exports = function PersonalAreaController(req, res) {
         if (err) {
             return next(err);
         }
-        if (req.session.dishes) {
-            req.session.dishes = [];
-        }
-        req.session.isOwner = req.query.owner;
-        req.session.order = {};
+        
         res.render('personalArea', {services: services, user: req.user});
     });
 };
