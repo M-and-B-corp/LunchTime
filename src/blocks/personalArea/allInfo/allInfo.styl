@@ -1,0 +1,82 @@
+@import '../../../stylus/vars.styl'
+
+.allInfo
+  background-color #fff
+  width 70%
+  margin 0 auto
+  margin-top 20px
+  border-top 5px solid buttons
+  padding-bottom 10px
+
+.allInfo__title
+  padding 17px 20px 15px
+
+.info-title
+  font-size 1.5em
+  font-style normal
+  font-variant normal
+  font-weight 300
+  font-stretch normal
+  line-height normal
+  font-family Roboto, arial, sans-serif
+
+.info-content__phone
+  margin-bottom 10px
+
+.phone
+  display table-row
+
+.phone__title
+  display table-cell
+  font-weight bold
+  padding-right 26px
+  width 80%
+
+.phone__number
+  display table-cell
+  padding-right 10px
+
+.phone__operator
+  display table-cell
+
+.adress
+  display table-row
+
+.adress__title
+  display table-cell
+  font-weight bold
+  padding-right 26px
+  width 82%
+
+.adress__adress
+  display table-cell
+  white-space nowrap
+
+.info-content
+  display table
+  margin-left 20px
+  margin-right 20px
+  width 100%
+
+@media screen and (max-width: 1200px)
+  .phone__title
+    width 75%
+
+  .adress__title
+    width 78%
+
+@media screen and (max-width: 977px)
+  .phone__title
+    width 70%
+
+  .adress__title
+    width 73%
+
+@media screen and (max-width: 810px)
+  .info-content
+    margin-left 0
+    margin-right 0
+
+@media screen and (max-width: 385px)
+  .allInfo
+    overflow-x: scroll;

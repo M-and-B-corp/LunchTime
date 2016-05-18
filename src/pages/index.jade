@@ -14,6 +14,8 @@ block title
     if user
         +header(user)
         +button("Создать новый заказ", [".button_new-order"],{'href': '/services?owner=True' })
+        .personalArea
+            a.personalArea__link(href="/personal_area") Личный кабинет
     else
         +header()
         +button("Создать новый заказ", [".button_new-order", "button_not_active"])
