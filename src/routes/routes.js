@@ -12,8 +12,11 @@ var addOrder = require('../controllers/addOrder');
 var wantSame = require('../controllers/wantSame.js');
 var removeFromBasketController = require('../controllers/removeFromBasket.js');
 var checkController = require('../controllers/check.js');
+var personalAreaController = require('../controllers/personalArea.js');
 
 router.get('/', homeController);
+
+router.get('/personal_area', personalAreaController);
 
 router.get('/services', servicesController);
 router.post('/setTime', setTime);
