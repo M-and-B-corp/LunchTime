@@ -2,7 +2,8 @@ var request = require('request'),
     cheerio = require('cheerio'),
     url = 'http://city-food.by',
     DishModel = require('../models/dish').model,
-    CategoryModel = require('../models/category').model;
+    CategoryModel = require('../models/category').model,
+    mongoose = require('mongoose');
 
 function load(url) {
     return new Promise(function (resolve, reject) {
@@ -27,7 +28,8 @@ function findAndSaveDishes(category) {
                     category: category.href,
                     image: $(this).find('img').attr('src'),
                     description: $(this).find('.views-field-field-text div').text(),
-                    uselfulness: $(this).find('.views-field-field-text2 div').text()
+                    uselfulness: $(this).find('.views-field-field-text2 div').text(),
+                    _serviceId: new mongoose.Types.ObjectId("573a19dad7113a722fbbc0e1")
                 });
             }).toArray();
         })
