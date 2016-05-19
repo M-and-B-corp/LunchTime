@@ -20,7 +20,7 @@ router.get('/personal_area', personalAreaController);
 
 router.get('/services', servicesController);
 router.post('/setTime', setTime);
-router.post('/services/:id', serviceController);
+router.get('/services/:id', serviceController);
 router.get('/removeFromBasket/:id', removeFromBasketController);
 
 router.post('/mymenu', myMenu);

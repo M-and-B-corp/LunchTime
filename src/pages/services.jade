@@ -17,8 +17,8 @@ block content
             +sidebarmenu("Кухни")
             each service, ind in services
                 +offers(service, "", ind)
-                    form.offers-plugin(action="/services/"+service._id method="post")
-                        +button("Сделать заказ", "offers-plugin__button", {"type": "submit"})
+                    .offers-plugin
+                        +button("Сделать заказ", "offers-plugin__button", {href: "/services/"+service._id})
         +footer("Заказывайте еду на нашей стороне, на темной стороне...")
     script
         include ../blocks/sidebarmenu/sidebarmenu.js
