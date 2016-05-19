@@ -32,8 +32,7 @@ passport.use('facebook',
                     var newPerson = new Person();
                     newPerson.facebookId = profile.id;
                     newPerson.name = profile.displayName;
-                    if (newPerson.photo) newPerson.photo = profile.photo;
-                    else newPerson.photo = '../images/header/authorisation/defaultAvatar.jpg';
+                    newPerson.avatar = '../../images/header/authorisation/defaultAvatar.jpg';
                     newPerson.save(function (err) {
                         if (err)
                             throw err;
@@ -64,8 +63,8 @@ passport.use('vk',
                     var newPerson = new Person();
                     newPerson.vkId = profile.id;
                     newPerson.name = profile.displayName;
-                    if (newPerson.photo) newPerson.photo = profile.photo;
-                    else newPerson.photo = '../images/header/authorisation/defaultAvatar.jpg';
+                    if (profile.photos[0].value) newPerson.avatar = profile.photos[0].value;
+                    else newPerson.avatar = '../../images/header/authorisation/defaultAvatar.jpg';
                     newPerson.save(function (err) {
                         if (err)
                             throw err;
