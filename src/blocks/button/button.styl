@@ -4,7 +4,7 @@
   display inline-block
   text-decoration none
   text-align center
-  font-weight bold
+  font-weight 100
   margin 6px
 
 .button__button
@@ -12,23 +12,24 @@
   padding 15px 25px
   color buttons-text-color
   background buttons
-  border-radius 4px
+  border-radius 5px
   text-decoration none
-  font-weight normal
   font-size 1em
   height 49px
+  box-shadow 0 1px 1px #005c04
   &:hover
-    background-color buttons-hover
+    background-color #57b817
   &:active
-    background-color buttons-active
+    background-color #489417
+    box-shadow 0 1px 1px #003303
 
 .button__icon
-  display none
-  padding-left 16px
+  //display none
+  padding-left 5px
 
 .button_icon .button__icon
   display inline-block
-  width 25px
+  width 40px
   height 25px
   background-size 25px
   margin -6px
@@ -54,6 +55,13 @@
 
 .button_not_active
   background buttons-non-active
+  box-shadow 0 1px 1px #232323
+  &:hover
+    background-color buttons-non-active
+    box-shadow 0 1px 1px #232323
+  &:active
+    background-color buttons-non-active
+    box-shadow 0 1px 1px #232323
 
 .button_size-s .button__button
     padding 5px 10px
