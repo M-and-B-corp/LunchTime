@@ -5,7 +5,6 @@ include ../blocks/session/session
 include ../blocks/menuitem/menuitem
 include ../blocks/group/group
 include ../blocks/offers/offers
-include ../blocks/offers-plugin/offers-plugin
 include ../blocks/sidebarmenu/sidebarmenu
 include ../blocks/footer/footer
 
@@ -17,9 +16,9 @@ block content
         .main-wrapper__carry
             +sidebarmenu("Кухни")
             each service, ind in services
-                +offers(service, "", ind) 
-                    +offers-plugin(service)
+                +offers(service, "", ind)
+                    .offers-plugin
+                        +button("Сделать заказ", "offers-plugin__button", {href: "/services/"+service._id})
         +footer("Заказывайте еду на нашей стороне, на темной стороне...")
     script
         include ../blocks/sidebarmenu/sidebarmenu.js
-//- , ind
