@@ -6,11 +6,11 @@ mixin basket(orders, service)
             input(type="hidden", name="service" value=service)
             .orders
                 each item in orders
-                    +order(item.name, item.price, item._id)
+                    +order(item.title, item.price, item._id)
             hr.basket__hr
             .basket__allcost
                 span.total_sum Общая стоимость:
-                span руб.
+                span  руб.
                 script.
                     var spans = document.querySelectorAll('.order__cost_val');
                     var sum = 0;
