@@ -1,5 +1,5 @@
 mixin button(content, mods, options)
-    .button
+    .button(class=mods)
         if options && options.href
             a(href=options.href)
                 button.button__button

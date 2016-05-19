@@ -16,9 +16,10 @@
   text-decoration none
   font-size 1em
   height 49px
-  box-shadow 0 1px 1px #005c04
+  box-shadow 0 2px 5px 0 rgba(0,0,0,.26)
   &:hover
     background-color #57b817
+    box-shadow 0 4px 9px 0 rgba(0,0,0,.26)
   &:active
     background-color #489417
     box-shadow 0 1px 1px #003303
@@ -49,9 +50,18 @@
   padding 0
 
 .button_new-order
+  position fixed
+  bottom 40px
+  right 40px
+  padding 15px 38px
+  border-radius 60px
+  font-size 2em
+  z-index 10
+
+.button_new-order .button__title
   position absolute
-  top 30px
-  right 120px
+  bottom 3px
+  right 22px
 
 .button_not_active
   background buttons-non-active
