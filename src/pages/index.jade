@@ -13,12 +13,12 @@ block title
     title Главная страница
     if user
         +header(user)
-        +button('Создать новый заказ', ['.button_new-order'],{'href': '/services?owner=True' })
+        +button("+", ["button_new-order"],{'href': '/services?owner=True' })
         .personalArea
-            +button('Личный кабинет', ['.button_new-order'],{'href': '/personal_area'})
+            +button('Личный кабинет', [],{'href': '/personal_area'})
     else
         +header()
-        +button('Создать новый заказ', ['.button_new-order', 'button_not_active'])
+        +button("+", ["button_new-order", "button_not_active"])
     script
         include ../blocks/total/total.js
     .main-wrapper
