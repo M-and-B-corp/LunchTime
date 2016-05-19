@@ -22,21 +22,30 @@ function findAndSaveDishes(category) {
     return load(url + category.href)
         .then(function ($) {
             return $('.views-row').map(function () {
-                return new DishModel({
-                    title: $(this).find('.views-field-title span').text(),
-                    price: $(this).find('.views-field-sell-price span').text(),
-                    category: category.href,
-                    image: $(this).find('img').attr('src'),
-                    description: $(this).find('.views-field-field-text div').text(),
-                    uselfulness: $(this).find('.views-field-field-text2 div').text(),
-                    _serviceId: new mongoose.Types.ObjectId("573a19dad7113a722fbbc0e1")
-                });
+
+                var price = +$(this).find('.views-field-sell-price span').text().split(' ')[0];
+                if (price != '') {
+
+                    return new DishModel({
+                        title: $(this).find('.views-field-title span').text(),
+                        price: price,
+                        category: category.href,
+                        image: $(this).find('img').attr('src'),
+                        description: $(this).find('.views-field-field-text div').text(),
+                        uselfulness: $(this).find('.views-field-field-text2 div').text(),
+                        _serviceId: new mongoose.Types.ObjectId("573a19dad7113a722fbbc0e1")
+                        //TODO: Поставить id в зависимости от сервиса
+                    });
+                }
             }).toArray();
         })
         .then(function (dishes) {
             dishes.map(function (dish) {
                 return dish.save();
             });
+        })
+        .catch(function (err) {
+            console.log(err);
         })
 }
 
@@ -65,22 +74,20 @@ module.exports = function () {
             return categories;
         })
         .then(function (categories) {
-            var dishes = [];
             Promise.all(categories.map(function (category) {
-                return findAndSaveDishes(category, dishes);
-            }))
-                .then(function () {
-                    var categoryModels = categories.map(function (category) {
-                        return new CategoryModel({
-                            title: category.title,
-                            href: category.href,
-                            service: url
-                        });
+                return findAndSaveDishes(category);
+            })).then(function () {
+                var categoryModels = categories.map(function (category) {
+                    return new CategoryModel({
+                        title: category.title,
+                        href: category.href,
+                        service: url
                     });
-                    categoryModels.map(function (category) {
-                        return category.save();
-                    });
-                })
+                });
+                categoryModels.map(function (category) {
+                    return category.save();
+                });
+            })
         })
         .then(function () {
             console.log('seed loading finished');
