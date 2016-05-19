@@ -19,5 +19,5 @@ mixin basket(orders, service)
                     }
                     document.querySelector('.total_sum').innerHTML = 'Общая стоимость: ' + sum;
             .basket__button
-                +button("Заказать", ['button_icon', 'button_icon-cart'], {"type": "submit", "name":"action", "value": "newOrder"})
+                +button("Заказать", [], {"type": "submit", "name":"action", "value": "newOrder"})
             .basket__image
