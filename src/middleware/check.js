@@ -1,6 +1,6 @@
 var OrderModel = require('../models/order').model;
 
-module.exports = function(req, res, err) {
+module.exports = function(req, res) {
 
     OrderModel.findOne({_id: req.body.orderId}, function (err, order) {
         if (err) {
@@ -21,5 +21,4 @@ module.exports = function(req, res, err) {
             }
         });
     });
-
 };

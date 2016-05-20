@@ -51,7 +51,7 @@ function findAndSaveDishes(category) {
 
 module.exports = function () {
     console.log('seed loading start');
-    new Promise(function (resolve, reject) {
+    new Promise(function (resolve) {
         CategoryModel.remove({}, function () {
             DishModel.remove({}, function () {
                 return resolve();

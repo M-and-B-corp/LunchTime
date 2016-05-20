@@ -1,47 +1,50 @@
-var express = require('express');
-var router = express.Router();
+var express = require('express'),
+    router = express.Router(),
+    passport = require('passport'),
 
-var servicesController = require('../controllers/services.js');
-var serviceController = require('../controllers/menuPage.js');
-var passport = require('passport');
-var homeController = require('../controllers/home.js');
-var myMenu = require('../controllers/myMenu');
-var setTime = require('../controllers/setTime');
-var addToShoppingCart = require('../controllers/addToShoppingCart');
-var addOrder = require('../controllers/addOrder');
-var wantSame = require('../controllers/wantSame.js');
-var removeFromBasketController = require('../controllers/removeFromBasket.js');
-var checkController = require('../controllers/check.js');
-var personalAreaController = require('../controllers/personalArea.js');
+    //Index//
+    myMenu = require('../controllers/myMenu'),
+    wantSame = require('../controllers/wantSame.js'),
+    homeController = require('../controllers/home.js'),
+    personalAreaController = require('../controllers/personalArea.js'),
+    toOrderController = require('../controllers/toOrder.js'),
+    checkController = require('../middleware/check.js'),
 
-router.get('/', homeController);
-
-router.get('/personal_area', personalAreaController);
-
-router.get('/services', servicesController);
-router.post('/setTime', setTime);
-router.get('/services/:id', serviceController);
-router.get('/removeFromBasket/:id', removeFromBasketController);
-
-router.post('/mymenu', myMenu);
-
-router.get('/auth/fb',passport.authenticate('facebook', {successRedirect: 'back', failureRedirect: '/'}));
-router.get('/auth/vk',passport.authenticate('vk', {successRedirect: 'back', failureRedirect: '/'}));
-router.get('/logout', function(req, res) {
+    //Services//
+    servicesController = require('../controllers/services.js'),
+    serviceController = require('../controllers/menuPage.js'),
+    
+    //MenuPage//
+    addToShoppingCart = require('../controllers/addToShoppingCart'),
+    addOrder = require('../controllers/addOrder'),
+    removeFromBasketController = require('../controllers/removeFromBasket.js');
+    
+//Authorisation//
+router.get('/auth/fb', passport.authenticate('facebook', {successRedirect: 'back', failureRedirect: '/'}));
+router.get('/auth/vk', passport.authenticate('vk', {successRedirect: 'back', failureRedirect: '/'}));
+router.get('/logout', function (req, res) {
     req.logout();
     res.redirect('/');
 });
 
-router.post('/orders', addToShoppingCart);
-
-router.post('/basket', addOrder);
-router.get('/basket', function(req,res) {
-    res.render('/', {order: req.session.order});
-    req.session.order = {};
-});
-
-router.post('/wantAlso', wantSame);
-
+//Index//
+router.get('/', homeController);
+router.get('/personal_area', personalAreaController);
 router.post('/check', checkController);
+router.post('/wantAlso', wantSame);
+router.post('/mymenu', myMenu);
+router.post('/toOrder', toOrderController);
+
+//Services//
+router.get('/services', servicesController);
+
+//MenuPage//
+router.get('/services/:id', serviceController);
+router.get('/removeFromBasket/:id', removeFromBasketController);
+router.get('/basket', function (req, res) {
+    res.render('/', {order: req.session.order});
+});
+router.post('/basket', addOrder);
+router.post('/orders', addToShoppingCart);
 
 exports.router = router;

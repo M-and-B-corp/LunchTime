@@ -15,7 +15,7 @@ var express = require('express'),
 
     cookieParser = require('cookie-parser'),
 
-    parser = require('./src/parser/parser.js');
+    parser = require('./src/middleware/parser.js');
 
 //TODO: Избавиться от хардкода(сделать конфиг)
 mongoose.connect('mongodb://localhost/lenka');
