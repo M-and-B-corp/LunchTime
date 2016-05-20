@@ -1,9 +1,9 @@
 include ../order/order
 
-mixin basket(orders, service)
+mixin basket(orders, serviceId)
     .basket
         form.basket__form(action="/basket" method="post")
-            input(type="hidden", name="service" value=service)
+            input(type="hidden", name="serviceId" value=serviceId)
             .orders
                 each item in orders
                     +order(item.title, item.price, item._id)
@@ -19,5 +19,5 @@ mixin basket(orders, service)
                     }
                     document.querySelector('.total_sum').innerHTML = 'Общая стоимость: ' + sum;
             .basket__button
-                +button("Заказать", [], {"type": "submit", "name":"action", "value": "newOrder"})
+                +button("Заказать", [], {"type": "submit"})
             .basket__image

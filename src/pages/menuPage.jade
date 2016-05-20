@@ -1,11 +1,9 @@
-extends ../views/layout/layout
+extends layout
 include ../blocks/button/button
 include ../blocks/header/header
 include ../blocks/session/session
 include ../blocks/menuitem/menuitem
-include ../blocks/group/group
 include ../blocks/offers/offers
-include ../blocks/sidebarmenu/sidebarmenu
 include ../blocks/footer/footer
 include ../blocks/basket/basket
 
@@ -19,11 +17,11 @@ block content
                 span.main-wrapper__title Что вы хотите съесть сегодня?
                 each dish in dishes
                     form(action="/orders", method="post").main-wrapper__menuitem
-                        input(type="hidden", name="dishId" value="#{dish._id}")
+                        input(type="hidden", name="dishId" value=dish._id)
                         +menuitem(dish)
             .main-wrapper__cart
                 span.main-wrapper__title Корзина
-                +basket(orders, service)
+                +basket(orders, serviceId)
         +button("Назад к сервисам", [],{'href': '/services?owner=True'})
         +footer("Заказывайте еду на нашей стороне, на темной стороне...")
 

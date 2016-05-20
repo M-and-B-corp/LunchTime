@@ -9,7 +9,7 @@ var gulp = require('gulp'),
     stylus = require('gulp-stylus'),
     autoprefixer = require('gulp-autoprefixer'),
     htmlmin = require('gulp-htmlmin'),
-    parse = require('./src/parser/parser'),
+    parse = require('./src/middleware/parser'),
     mongoose = require('mongoose');
 
 gulp.task('img', function () {
@@ -19,7 +19,7 @@ gulp.task('img', function () {
 });
 
 gulp.task('stylus', function () {
-    return gulp.src('./src/index.styl')
+    return gulp.src('./src/stylus/index.styl')
         .pipe(stylus())
         .pipe(autoprefixer({
             browsers: ['last 2 versions'],
@@ -72,7 +72,7 @@ gulp.task('webserver', function () {
 gulp.task('parse', function () {
 
     mongoose.connect('mongodb://localhost/lenka');
-        parse();
+    parse();
     //FIXME: Сделать так чтобы задача завершалась без CTRL+C
 });
 
