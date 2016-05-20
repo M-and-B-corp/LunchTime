@@ -12,9 +12,7 @@ block title
     title Главная страница
     if user
         +header(user)
-        +button("+", ["button_new-order"],{'href': '/services?owner=True'})
-        .personalArea
-            +button('Личный кабинет', [],{'href': '/personal_area'})
+        +button("+", ["button_new-order"],{'href': '/services?owner=True' })
     else
         +header()
     .main-wrapper

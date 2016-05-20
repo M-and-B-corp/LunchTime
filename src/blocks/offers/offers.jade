@@ -8,7 +8,7 @@ mixin offers(service, mod, index)
             .offers__title= service.title
             +company-info(service, index)
             .offers__down-text
-                .offers__text= service.phone
-            if block
-                block
-
+                each phone in service.phone
+                    .offers__text= phone
+            .offers__button
+                +button("Сделать заказ", "offers-plugin__button", {href: "/services/"+service._id})
