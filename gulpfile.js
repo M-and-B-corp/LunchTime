@@ -19,7 +19,7 @@ gulp.task('img', function () {
 });
 
 gulp.task('stylus', function () {
-    return gulp.src('./src/stylus/index')
+    return gulp.src('./src/stylus/index.styl')
         .pipe(stylus())
         .pipe(autoprefixer({
             browsers: ['last 2 versions'],
