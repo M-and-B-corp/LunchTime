@@ -1,9 +1,9 @@
 include ../button/button
 include ../auth/auth
 
-mixin header(person)
+mixin header(user)
     .header
         .header__block
             a.header__logo(alt="logo" href="/")
         .header__auth
-            +auth(person)
+            +auth(user)
