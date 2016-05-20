@@ -1,5 +1,6 @@
 mixin headerInfo(user)
     .headerInfo
         .headerInfo__photo
+            img.avatar(src=user.avatar)
         .headerInfo__name
             center= user.name
