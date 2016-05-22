@@ -1,16 +1,11 @@
 mixin auth(user)
     if user
-        .auth()
-            ul.dropdown
-                li.dropdown-top
-                    a.dropdown-top
-                        img.auth__avatar(src=user.avatar)
-                    ul.dropdown-inside
-                        li
-                            a.auth__profile(href="/personal_area") Профиль
-                        li
-                            a.auth__logout(href="/logout") Выйти
+        .auth
+            a.auth__profile(href="/personal_area")
+                img.auth__avatar(src=user.avatar)
+            a.auth__logout(href="/logout")
+                img.auth__exit(src="../images/head/exit.png")
     else
-        .auth()
+        .auth
             a.auth__social.auth__social_vk(href="/auth/vk")
             a.auth__social.auth__social_fb(href="/auth/fb")

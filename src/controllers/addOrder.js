@@ -12,7 +12,6 @@ module.exports = function (req, res, next) {
             service: service,
             subscriber: []
         });
-        console.log(orderModel);
         orderModel.save(function (err) {
             if (!err) {
                 req.session.dishes = {};

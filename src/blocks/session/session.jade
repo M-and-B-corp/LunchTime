@@ -1,27 +1,48 @@
 include ../button/button
 include ../company/company
+include ../subscriber/subscriber
 
 mixin session(name, time, logo, id, order, user)
     .session
-        +company(logo)
-        .session__name= name
-        each dish in order.dishes
-            .session__dish=dish.name
+        .session__header
+            .header_content
+                img.header_content__avatar(src=user.avatar)
+                .info_owner
+                    .info_owner__name= name
+                    .info_owner__time сегодня в 16:04
+                .header_content__button ...
 
+        hr
+        .session__main
+            .main_content
+                .main_content__dishes
+                    ul
+                    each dish in order.dishes
+                        li.session__dish=dish.title
+                img.main_content__image(src=order.dishes[0].image)
         .session__controls
             if user
-                form.form(action="/wantAlso", method="post")
-                    input(type="hidden" name="userId" value=user._id)
-                    input(type="hidden" name="orderId" value=order._id)
-                    +button("Хочу также!", [], {"type": "submit"})
+                .control
+                    .control__chat
+                        +button("Чат", [], {"type": "submit"})
+                        form.form(action="/wantAlso", method="post")
+                            input(type="hidden" name="userId" value=user._id)
+                            input(type="hidden" name="orderId" value=order._id)
+                            +button("Хочу также!", [], {"type": "submit"})
 
-                form(action="/mymenu", method="post")
-                    input(type="hidden", name="orderId" value=order._id)
-                    +button("Своё меню!", [], {"type": "submit", "name": "action", "value": "menu"})
+                        //form(action="/mymenu", method="post")
+                        //    input(type="hidden", name="orderId" value=order._id)
+                        //    +button("Своё меню!", [], {"type": "submit", "name": "action", "value": "menu"})
 
-                form(action="/toOrder", method="post")
-                    +button("Заказать", [], {"type": "submit", "name": "action", "value": "menu"})
+                    .control__order
+                        form(action="/toOrder", method="post")
+                            +button("Заказать", [], {"type": "submit", "name": "action", "value": "menu"})
 
             else
                 +button("Хочу также!", ["button_not_active"])
                 +button("Своё меню!", ["button_not_active"])
+        .session__subscriber
+            .subscriber__title Подписчики
+            .subscriber__list
+                each subscriber in order.subscriber
+                    +subscriber(subscriber.person.name, subscriber.dishes, subscriber._id, subscriber, order)

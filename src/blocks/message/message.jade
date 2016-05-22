@@ -1,0 +1,10 @@
+mixin message(user)
+    .message
+        .message__avatar
+            img(src=user.avatar)
+        .message__content
+            .message__name= user.name
+            .message__text Привет! Как дела?
+        .message__time 12:13
+
+
