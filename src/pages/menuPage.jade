@@ -11,6 +11,16 @@ block title
     title Страница компании
 block content
     +header(user)
+    .category
+        span Суши
+        span Бургеры
+        span Салаты/Холодные закуски
+        span Первые блюда
+        span Горячее
+        span Гарнир/Соусы
+        span Десерт
+        span Соки/Напитки
+
     .main-wrapper
         .main-wrapper__company
             .main-wrapper__menu
@@ -22,6 +32,8 @@ block content
             .main-wrapper__cart
                 span.main-wrapper__title Корзина
                 +basket(orders, serviceId)
+        .cart_menu
+            +button("Корзина", ['button_size-m'], {"type": "submit"})
         +button("Назад к сервисам", [],{'href': '/services?owner=True'})
         +footer("Заказывайте еду на нашей стороне, на темной стороне...")
 
