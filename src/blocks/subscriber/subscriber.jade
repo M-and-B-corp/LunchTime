@@ -1,12 +1,6 @@
 mixin subscriber(name, dishes, id, subscriber, order)
     .subscriber
         .subscriber__name= name
-        ol.subscriber__dishes
-            each dish in dishes
-                li.subscriber__dish
-                    .dish__name= dish.name
-                    .dish__hyphen -
-                    .dish__price= dish.price
         .subscriber__checkbox
             input.subscriber__check-money(id=id type="checkbox" onclick="check()")
             script.
