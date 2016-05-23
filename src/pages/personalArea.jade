@@ -12,25 +12,9 @@ include ../blocks/personalArea/allInfo/allInfo
 block title
     title Личный кабинет
 block content
-    +header(user)
-    .main-wrapper
-        +headerInfo(user)
-        +allInfo(user)
-
     if user
-        #edit.edit
-            .edit__close(onclick="document.getElementById('edit').style.display='none'")
-            .edit__content
-                .edit__title Информация
-                .edit__contact
-                    input(type="text" value=user.name)
-                    input(type="text" value="Телефон")
-                    input(type="text" value="Улица")
-                    input(type="text" value="Номер дома")
-                    input(type="text" value="Корпус")
-                    input(type="text" value="Квартира")
-                .edit__input
-                    +button("Сохранить", [], {"type": "submit"})
-
-
+        +header(user)
+        .main-wrapper
+            +headerInfo(user)
+            +allInfo(user)
 
