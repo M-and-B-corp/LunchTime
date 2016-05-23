@@ -31,6 +31,6 @@ module.exports = function(req, res, next) {
                     return 0;
                 });
             }
-            res.render('index', {orders: orders, user: req.user});
+            res.render('index', {orders: orders});
         });
 };
