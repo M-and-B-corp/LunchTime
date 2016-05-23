@@ -38,54 +38,54 @@ block title
                     span.title__user_name= user.name
                 .chat__history
                 form.chat__input
-                    input.form-control(autocomplete='off' autofocus placeholder="Сообщение")
-                    +button("Send!", ['button_size-m'], {"type": "submit"})
+                    img(src=user.avatar)
+                    .input_message
+                        input.form-control(autocomplete='off' autofocus style="color: #777;" value="Введите Ваше сообщение.." onfocus="if (this.value == 'Введите Ваше сообщение..') {this.value = ''; this.style.color = '#000';}" onblur="if (this.value == '') {this.value = 'Введите Ваше сообщение..'; this.style.color = '#777';}")
+                        +button("Send!", ['button_size-m'], {"type": "submit"})
         script.
             var mainUser = !{JSON.stringify(user)};
         script
             include chat.js
         <---------Чат---------------->
 
-
-    <---------Оформление заказа---------------->
-    each order in orders
-        if user.name === order.owner.name
-            #orderform.orderform
-                .orderform__close(onclick="document.getElementById('orderform').style.display='none'")
-                .orderform__content
-                    .orderform__title
-                        .order_title Форма заказа
-                    .orderform__contact
-                        .info-content__phone
-                            .phone
-                                .phone__title Телефон
-                                input(type="text" class="phone__number" value="+375(29)9789355" id="mytext")
-                            .phone
-                                .phone__title Оператор
-                                input(type="text" class="phone__operator" value="Vel.")
-                            .adress
-                                .adress__title Улица
-                                input(type="text" class="adress__adress" value="Я. Коласа")
-                            .adress
-                                .adress__title Дом
-                                input(type="text" class="adress__adress" value="28")
-                            .adress
-                                .adress__title Корпус
-                                input(type="text" class="adress__adress" value="б")
-                            .adress
-                                .adress__title Квартира
-                                input(type="text" class="adress__adress" value="23")
-                    .orderform__dishes
-                        each dish in order.dishes
-                            img(src=dish.image)
-                        each subscriber in order.subscriber
-                            each subDish in subscriber.dishes
-                                img(src=subDish.image)
-                    .orderform__input
-                        .input__button
-                            +button("Заказать", [], {"type": "submit"})
-    <---------Оформление заказа---------------->
-
+            each order in orders
+                if user.name===order.owner.name
+                    #orderform.orderform
+                        .orderform__close(onclick="document.getElementById('orderform').style.display='none'")
+                        .orderform__content
+                            .orderform__title
+                               .order_title Форма заказа
+                            .orderform__contact
+                                .info-content__phone
+                                    .phone
+                                        .phone__title Телефон
+                                        input(type="text" class="phone__number" value="+375(29)9789355" id="mytext")
+                                    .phone
+                                        .phone__title Оператор
+                                        input(type="text" class="phone__operator" value="Vel.")
+                                    .adress
+                                        .adress__title Улица
+                                        input(type="text" class="adress__adress" value="Я. Коласа")
+                                    .adress
+                                        .adress__title Дом
+                                        input(type="text" class="adress__adress" value="28")
+                                    .adress
+                                        .adress__title Корпус
+                                        input(type="text" class="adress__adress" value="б")
+                                    .adress
+                                        .adress__title Квартира
+                                        input(type="text" class="adress__adress" value="23")
+                            .orderform__dishes
+                                each dish in order.dishes
+                                    .photo(data-title=dish.title)
+                                        img(src=dish.image)
+                                each subscriber in order.subscriber
+                                    each subDish in subscriber.dishes
+                                        .photo(data-title=subDish.title)
+                                            img(src=subDish.image)
+                            .orderform__input
+                                .input__button
+                                    +button("Заказать", [], {"type": "submit"})
 
 
 
