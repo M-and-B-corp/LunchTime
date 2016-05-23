@@ -39,5 +39,21 @@ block title
                         input(type="text")
                         +button("Send!", ['button_size-m'], {"type": "submit"})
 
+            #orderform.orderform
+                .orderform__close(onclick="document.getElementById('orderform').style.display='none'")
+                .orderform__content
+                    .orderform__title Форма заказа
+                    .orderform__contact
+                        input(type="text" value=user.name)
+                        input(type="text" value="Телефон")
+                        input(type="text" value="Улица")
+                        input(type="text" value="Номер дома")
+                        input(type="text" value="Корпус")
+                        input(type="text" value="Квартира")
+                    .orderform__input
+                        +button("Заказать", [], {"type": "submit"})
+
+
+
 
 
