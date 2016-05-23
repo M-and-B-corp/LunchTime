@@ -19,7 +19,7 @@ mixin session(name, time, logo, id, order, user)
                     ul
                     each dish in order.dishes
                         li.session__dish=dish.title
-                img.main_content__image(src=order.dishes[0].image)
+                img.main_content__image(src='images/tastyImages/SouthWest_Burger.jpg')
         .session__controls
             if user
                 .control

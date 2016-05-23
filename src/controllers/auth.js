@@ -1,17 +1,18 @@
 var passport = require('passport');
+var req = require("passport/lib/authenticator.js");
 var FacebookStrategy = require('passport-facebook').Strategy;
 var VKStrategy = require('passport-vkontakte').Strategy;
 var Person = require('./../models/person').model;
 
-var host = process.env.HOST || 'http://localhost:3000'
+var host = process.env.HOST || 'http://localhost:3000';
 
 passport.serializeUser(function (user, done) {
     done(null, user._id);
 });
 
 passport.deserializeUser(function (id, done) {
-    Person.findOne({_id: id}, function(err, user) {
-       done(err, user);
+    Person.findOne({_id: id}, function (err, user) {
+        done(err, user);
     });
 });
 passport.use('facebook',

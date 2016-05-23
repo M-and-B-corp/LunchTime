@@ -20,15 +20,25 @@ var express = require('express'),
 //TODO: Избавиться от хардкода(сделать конфиг)
 mongoose.connect('mongodb://localhost/lenka');
 app.use(cookieParser());
+
+var sessionStore = require('./src/lib/sessionStore.js');
+
 app.use(session({
-    secret: 'appsecret',
+    secret: "appsecret",
+    key: "sid",
     resave: false,
     saveUninitialized: true,
     cookie: {
+        path: "/",
         secure: false,
-        maxAge: new Date(Date.now() + 3600000)
-    }
+        httpOnly: true,
+        maxAge: null
+    },
+    store: sessionStore
 }));
+
+app.use(require('./src/middleware/loadUser.js'));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -52,6 +62,8 @@ app.use(function (req, res) {
     res.render('404');
 });
 
-app.listen(process.env.PORT || 3000, '0.0.0.0', function () {
+var server = app.listen(process.env.PORT || 3000, '0.0.0.0', function () {
     console.log('Working ' + this.port);
 });
+
+require('./src/socket')(server);
