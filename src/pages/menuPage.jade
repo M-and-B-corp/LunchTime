@@ -29,11 +29,23 @@ block content
                     form(action="/orders", method="post").main-wrapper__menuitem
                         input(type="hidden", name="dishId" value=dish._id)
                         +menuitem(dish)
-            .main-wrapper__cart
+            #box.main-wrapper__cart(style="display: none;")
                 span.main-wrapper__title Корзина
                 +basket(orders, serviceId)
-        .cart_menu
-            +button("Корзина", ['button_size-m'], {"type": "submit"})
+        .cart_menu(onclick="openbox('box'); return false")
+            +button("Корзина", [], {"type": "submit"})
+
+        script.
+            function openbox(id) {
+                display = document.getElementById(id).style.display;
+
+                if (display == 'none') {
+                    document.getElementById(id).style.display = 'block';
+                } else {
+                    document.getElementById(id).style.display = 'none';
+                }
+            }
+
         +button("Назад к сервисам", [],{'href': '/services?owner=True'})
         +footer("Заказывайте еду на нашей стороне, на темной стороне...")
 
