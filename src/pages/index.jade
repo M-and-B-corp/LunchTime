@@ -11,6 +11,9 @@ include ../blocks/message/message
 
 block title
     title Главная страница
+    script(src="/socket.io/socket.io.js")
+    script(type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js")
     if user
         +header(user)
         +button("+", ["button_new-order"],{'href': '/services?owner=True' })
@@ -25,57 +28,64 @@ block title
                     //label(for='s' + order.id) Показать присоединившихся:
         +footer('© M&B Corporation')
 
-        if user
-            #chat.chat
-                .chat__close(onclick="document.getElementById('chat').style.display='none'")
-                .chat__content
-                    .chat__title
-                        span.title__user_name= user.name
-                    .chat__history
-                        +message(user)
-                        +message(user)
-                        +message(user)
-                    .chat__input
-                        //img(src=user.avatar)
-                        input(type="text")
-                        +button("Send!", ['button_size-m'], {"type": "submit"})
 
-            each order in orders
-                if user.name===order.owner.name
-                    #orderform.orderform
-                        .orderform__close(onclick="document.getElementById('orderform').style.display='none'")
-                        .orderform__content
-                            .orderform__title
-                               .order_title Форма заказа
-                            .orderform__contact
-                                .info-content__phone
-                                    .phone
-                                        .phone__title Телефон
-                                        input(type="text" class="phone__number" value="+375(29)9789355" id="mytext")
-                                    .phone
-                                        .phone__title Оператор
-                                        input(type="text" class="phone__operator" value="Vel.")
-                                    .adress
-                                        .adress__title Улица
-                                        input(type="text" class="adress__adress" value="Я. Коласа")
-                                    .adress
-                                        .adress__title Дом
-                                        input(type="text" class="adress__adress" value="28")
-                                    .adress
-                                        .adress__title Корпус
-                                        input(type="text" class="adress__adress" value="б")
-                                    .adress
-                                        .adress__title Квартира
-                                        input(type="text" class="adress__adress" value="23")
-                            .orderform__dishes
-                                each dish in order.dishes
-                                    img(src=dish.image)
-                                each subscriber in order.subscriber
-                                    each subDish in subscriber.dishes
-                                        img(src=subDish.image)
-                            .orderform__input
-                                .input__button
-                                    +button("Заказать", [], {"type": "submit"})
+    <---------Чат---------------->
+    if user
+        #chat.chat
+            .chat__close(onclick="document.getElementById('chat').style.display='none'")
+            .chat__content
+                .chat__title
+                    span.title__user_name= user.name
+                .chat__history
+                form.chat__input
+                    input.form-control(autocomplete='off' autofocus placeholder="Сообщение")
+                    +button("Send!", ['button_size-m'], {"type": "submit"})
+        script.
+            var mainUser = !{JSON.stringify(user)};
+        script
+            include chat.js
+        <---------Чат---------------->
+
+
+    <---------Оформление заказа---------------->
+    each order in orders
+        if user.name === order.owner.name
+            #orderform.orderform
+                .orderform__close(onclick="document.getElementById('orderform').style.display='none'")
+                .orderform__content
+                    .orderform__title
+                        .order_title Форма заказа
+                    .orderform__contact
+                        .info-content__phone
+                            .phone
+                                .phone__title Телефон
+                                input(type="text" class="phone__number" value="+375(29)9789355" id="mytext")
+                            .phone
+                                .phone__title Оператор
+                                input(type="text" class="phone__operator" value="Vel.")
+                            .adress
+                                .adress__title Улица
+                                input(type="text" class="adress__adress" value="Я. Коласа")
+                            .adress
+                                .adress__title Дом
+                                input(type="text" class="adress__adress" value="28")
+                            .adress
+                                .adress__title Корпус
+                                input(type="text" class="adress__adress" value="б")
+                            .adress
+                                .adress__title Квартира
+                                input(type="text" class="adress__adress" value="23")
+                    .orderform__dishes
+                        each dish in order.dishes
+                            img(src=dish.image)
+                        each subscriber in order.subscriber
+                            each subDish in subscriber.dishes
+                                img(src=subDish.image)
+                    .orderform__input
+                        .input__button
+                            +button("Заказать", [], {"type": "submit"})
+    <---------Оформление заказа---------------->
+
 
 
 
