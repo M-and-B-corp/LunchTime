@@ -7,20 +7,22 @@ mixin allInfo(user)
                 .info-content__phone
                     .phone
                         .phone__title Телефон
-                        .phone__number +375(29)9789355
-                        .phone__operator Vel.
-                .info-content__adress
+                        input(type="text" class="phone__number" value="+375(29)9789355" id="mytext")
+                    .phone
+                        .phone__title Оператор
+                        input(type="text" class="phone__operator" value="Vel.")
                     .adress
-                        .adress__title Адрес
-                        .adress__adress ул. Я. Коласа, д. 28
-        .allInfo__change(onclick="") Изменить
+                        .adress__title Улица
+                        input(type="text" class="adress__adress" value="Я. Коласа")
+                    .adress
+                        .adress__title Дом
+                        input(type="text" class="adress__adress" value="28")
+                    .adress
+                        .adress__title Корпус
+                        input(type="text" class="adress__adress" value="б")
+                    .adress
+                        .adress__title Квартира
+                        input(type="text" class="adress__adress" value="23")
 
-        .allInfo__dialog-change
-            .dialog-change__title Информация
-            .dialog-change__content
-                .change-content__phone
-                .change-content__adress
-
-
-
+        .allInfo__change(onclick="document.getElementById('mytext').setAttribute('disabled', 'disabled');") Изменить
 
