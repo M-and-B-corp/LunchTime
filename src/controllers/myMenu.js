@@ -8,7 +8,7 @@ module.exports = function(req, res) {
         		next();
         	}
         	req.session.order = order;
-        	req.session.dishes = [];
+        	req.session.orders = [];
         	res.redirect('/services/' + req.session.order.service._id);
         });
     }
