@@ -41,7 +41,7 @@ router.get('/services', servicesController);
 
 //MenuPage//
 router.get('/services/:id', serviceController);
-router.get('/removeFromBasket/:id', removeFromBasketController);
+router.post('/removeFromBasket', removeFromBasketController);
 router.get('/basket', function (req, res) {
     res.render('/', {order: req.session.order});
 });

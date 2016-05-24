@@ -101,8 +101,6 @@ module.exports = function (server) {
     io.sockets.on('connection', function (socket) {
         var username = socket.handshake.user.get('name');
         var avatar = socket.handshake.user.get('avatar');
-        console.log(avatar);
-        console.log(username);
         socket.broadcast.emit('join', username);
 
         socket.on('message', function (text, cb) {
