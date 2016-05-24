@@ -11,9 +11,6 @@ include ../blocks/message/message
 
 block title
     title Главная страница
-    script(src="/socket.io/socket.io.js")
-    script(type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js")
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js")
     if user
         +header(user)
         +button("+", ["button_new-order"],{'href': '/services?owner=True' })
@@ -29,7 +26,7 @@ block title
         +footer('© M&B Corporation')
 
 
-    <---------Чат---------------->
+
     if user
         #chat.chat
             .chat__close(onclick="document.getElementById('chat').style.display='none'")
@@ -45,8 +42,7 @@ block title
         script.
             var mainUser = !{JSON.stringify(user)};
         script
-            include chat.js
-        <---------Чат---------------->
+            include scripts/chat.js
 
             each order in orders
                 if user.name===order.owner.name

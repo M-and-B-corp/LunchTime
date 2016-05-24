@@ -1,15 +1,14 @@
-mixin order(title, sum, id)
+mixin order(title, price)
     .order
-        a.order__close(href="/removeFromBasket/" + id)
+        a.order__close
             i.order__icon.order__icon_close
-        .order__info #{item}
-            = title
-        a.order__less(href="#")
+        .order__info= title
+        a.order__less
             i.order__icon.order__icon_less
         .order__value
             input.order__value(value="1")
-        a.order__more(href="#")
+        a.order__more
             i.order__icon.order__icon_more
         .order__cost
-            span.order__cost_val= sum
+            span.order__cost_val= price
             span руб.
