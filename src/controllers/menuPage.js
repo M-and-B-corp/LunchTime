@@ -8,6 +8,6 @@ module.exports = function(req, res, next) {
         if (!req.session.dishes) {
             req.session.dishes = [];
         }
-        res.render('menuPage', {serviceId: req.params.id, dishes: dishes, orders: req.session.dishes, user: req.user});
+        res.render('menuPage', {serviceId: req.params.id, dishes: dishes, orders: req.session.dishes});
     });
 };
