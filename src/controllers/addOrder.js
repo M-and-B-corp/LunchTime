@@ -1,21 +1,24 @@
-var OrderModel = require('../models/order').model;
+var OrdersModel = require('../models/order').model;
 var ServiceModel = require('../models/service').model;
+var moment = require('moment');
 
 module.exports = function (req, res, next) {
     ServiceModel.findOne({_id: req.body.serviceId}, function (err, service) {
         if (err) {
             return next(err);
         }
-        var orderModel = new OrderModel({
+        
+        var orderModel = new OrdersModel({
             owner: req.user,
-            dishes: req.session.dishes,
+            orders: req.session.orders,
             service: service,
+            creatingTime: moment().format('HH:mm'),
             subscriber: []
         });
+        
         orderModel.save(function (err) {
-            if (!err) {
-                req.session.dishes = {};
-            }
+            req.session.orders = {};
+
             res.redirect('/');
         });
     });

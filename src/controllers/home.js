@@ -2,7 +2,7 @@ var OrderModel = require('../models/order').model;
 
 module.exports = function(req, res, next) {
     OrderModel.find({})
-        .populate("dishes")
+        .populate("orders.dish")
         .populate("subscriber.dishes")
         .exec(function (err, orders) {
             if (err) {

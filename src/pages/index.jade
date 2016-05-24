@@ -20,12 +20,9 @@ block title
         .main-page
             if user
                 each order in orders
-                    +session(order.owner.name, order.time, order.service.logo, order.service._id, order, user)
+                    +session(order)
                     input(id='s' + order.id type='checkbox').hide-form__input
-                    //label(for='s' + order.id) Показать присоединившихся:
         +footer('© M&B Corporation')
-
-
 
     if user
         #chat.chat
@@ -72,9 +69,9 @@ block title
                                         .adress__title Квартира
                                         input(type="text" class="adress__adress" value="23")
                             .orderform__dishes
-                                each dish in order.dishes
-                                    .photo(data-title=dish.title)
-                                        img(src=dish.image)
+                                each zakaz in order.orders
+                                    .photo(data-title=zakaz.dish.title)
+                                        img(src=zakaz.dish.image)
                                 each subscriber in order.subscriber
                                     each subDish in subscriber.dishes
                                         .photo(data-title=subDish.title)
