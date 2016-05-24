@@ -1,7 +1,7 @@
 module.exports = function (req, res) {
     req.session.dishes = req.session.dishes.filter(function (dish) {
-        return dish._id !== req.params.id;
+        return dish._id !== req.body.title;
     });
 
-    res.redirect('back');
+    res.send('ok');
 };
