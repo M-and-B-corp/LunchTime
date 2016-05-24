@@ -8,20 +8,38 @@ function sendForm() {
         type: $(this).attr('method'),
         url: $(this).attr('action')
     }).done(function (dish) {
-        addOrder(dish.title, dish.price, dish._id);
+        var dishInOrders = false;
+        $('.order').each(function () {
+            if ($(this).find('.order__input').eq(0).val() == dish._id) {
+                $(this).find('.order__value').eq(0).text(+$(this).find('.order__value').eq(0).text() + 1);
+                
+                dishInOrders = true;
+            }
+        });
+        
+        if (!dishInOrders) addOrder(dish.title, dish.price, dish._id);
 
         var close = $('.order').find('.order__close');
         close.off('click', sendOrder);
         close.on('click', sendOrder);
+
+        var more = $('.order__more');
+        more.off('click', sendIconMore);
+        more.on('click', sendIconMore);
+
+        var less = $('.order__less');
+        less.off('click', sendIconLess);
+        less.on('click', sendIconLess);
 
         updateSum();
     });
     return false;
 }
 
-function addOrder(title, sum) {
+function addOrder(title, sum, id) {
     var order = $("<div/>", {
-        "class": "order"
+        "class": "order",
+        id: id
     }).appendTo($('.orders'));
 
     var order__close = $("<a/>", {
@@ -37,6 +55,12 @@ function addOrder(title, sum) {
         text: title
     }).appendTo(order);
 
+    $("<input/>", {
+        "class": "order__input",
+        style: 'display: none',
+        value: id
+    }).appendTo(order);
+    
     var order__less = $("<a/>", {
         "class": "order__less"
     }).appendTo(order);
@@ -45,18 +69,13 @@ function addOrder(title, sum) {
         "class": "order__icon order__icon_less"
     }).appendTo(order__less);
 
-    var order__value = $("<div/>", {
-        "class": "order__value"
+    $("<div/>", {
+        "class": "order__value",
+        text: '1'
     }).appendTo(order);
 
-    $("<input/>", {
-        "class": "order__value",
-        value: '1'
-    }).appendTo(order__value);
-
     var order__more = $("<a/>", {
-        "class": "order__more",
-        href: '#'
+        "class": "order__more"
     }).appendTo(order);
 
     $("<i/>", {

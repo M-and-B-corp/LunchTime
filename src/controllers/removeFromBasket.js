@@ -1,6 +1,6 @@
 module.exports = function (req, res) {
-    req.session.dishes = req.session.dishes.filter(function (dish) {
-        return dish._id !== req.body.title;
+    req.session.orders = req.session.orders.filter(function (order) {
+        return order.dish._id != req.body.id;
     });
 
     res.send('ok');

@@ -5,11 +5,13 @@ close.on('click', sendOrder);
 function sendOrder() {
     var order = $(this).parent();
     $.ajax({
-        data: $('.order').find('.order__info').text(),
+        data: {
+            id: order.find('.order__input').val()
+        },
         method: 'post',
-        url: 'removeFromBasket'
+        url: '/removeFromBasket'
     }).done(function () {
-        $(this).off('click', sendOrder);
+        order.off('click', sendOrder);
         order.remove();
         updateSum();
     });
