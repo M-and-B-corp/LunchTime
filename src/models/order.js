@@ -7,9 +7,10 @@ var personSchema = require('./person').schema;
 
 var orderSchema = new Schema({
     owner: personSchema,
-    dishes: [{ type: Schema.Types.ObjectId, ref: 'Dish' }],
+    orders: [{count: String, dish: {type: Schema.Types.ObjectId, ref: 'Dish'}}],
     service: serviceSchema,
-    subscriber: [{ person: personSchema, dishes: [{ type: Schema.Types.ObjectId, ref: 'Dish' }], paid: Boolean }]
+    creatingTime: String,
+    subscriber: [{person: personSchema, dishes: [{type: Schema.Types.ObjectId, ref: 'Dish'}], paid: Boolean}]
 });
 
 module.exports = {

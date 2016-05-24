@@ -5,8 +5,8 @@ module.exports = function(req, res) {
         if (err) {
             return next(err);
         }
-        if (req.session.dishes) {
-            req.session.dishes = [];
+        if (req.session.orders) {
+            req.session.orders = [];
         }
         req.session.isOwner = req.query.owner;
         req.session.order = {};

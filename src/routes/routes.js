@@ -17,8 +17,9 @@ var express = require('express'),
     //MenuPage//
     addToShoppingCart = require('../controllers/addToShoppingCart'),
     addOrder = require('../controllers/addOrder'),
-    removeFromBasketController = require('../controllers/removeFromBasket.js');
-    
+    removeFromBasketController = require('../controllers/removeFromBasket.js'),
+    dishCountLessController = require('../controllers/dishCountLess');
+
 //Authorisation//
 router.get('/auth/fb', passport.authenticate('facebook', {successRedirect: 'back', failureRedirect: '/'}));
 router.get('/auth/vk', passport.authenticate('vk', {successRedirect: 'back', failureRedirect: '/'}));
@@ -42,6 +43,7 @@ router.get('/services', servicesController);
 //MenuPage//
 router.get('/services/:id', serviceController);
 router.post('/removeFromBasket', removeFromBasketController);
+router.post('/dishCountLess', dishCountLessController);
 router.get('/basket', function (req, res) {
     res.render('/', {order: req.session.order});
 });

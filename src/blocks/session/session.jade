@@ -2,14 +2,14 @@ include ../button/button
 include ../company/company
 include ../subscriber/subscriber
 
-mixin session(name, time, logo, id, order, user)
+mixin session(order)
     .session
         .session__header
             .header_content
-                img.header_content__avatar(src=user.avatar)
+                img.header_content__avatar(src=order.owner.avatar)
                 .info_owner
-                    .info_owner__name= name
-                    .info_owner__time сегодня в 16:04
+                    .info_owner__name= order.owner.name
+                    .info_owner__time= order.creatingTime
                 .header_content__button ...
 
         hr
@@ -17,11 +17,11 @@ mixin session(name, time, logo, id, order, user)
             .main_content
                 .main_content__dishes
                     ul
-                    each dish in order.dishes
-                        li.session__dish=dish.title
+                    each zakaz in order.orders
+                        li.session__dish=zakaz.dish.title
                 //img.main_content__image(src=order.dishes[0].image)
             .session__controls
-                if user
+                if user._id + '' == order.owner._id + ''
                     .control
                         .control__chat
                             +button("Чат", [], {"type": "submit"})
@@ -51,7 +51,7 @@ mixin session(name, time, logo, id, order, user)
 
         script.
             function openbox(id) {
-                display = document.getElementById(id).style.display;
+                var display = document.getElementById(id).style.display;
 
                 if (display == 'none') {
                     document.getElementById(id).style.display = 'block';
