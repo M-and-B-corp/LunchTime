@@ -4,6 +4,6 @@ include ../auth/auth
 mixin header(user)
     .header
         .header__block
-            a.header__logo(alt="logo" href="/")
+            a.header__title(href="/") LunchTime
         .header__auth
             +auth(user)
