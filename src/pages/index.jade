@@ -11,9 +11,10 @@ include ../blocks/message/message
 
 block title
     title Главная страница
+block content
     if user
         +header(user)
-        +button("+", ["button_new-order"],{'href': '/services?owner=True' })
+        +button("+", ["button_new-order"],{'href': '/services?owner=True'})
     else
         +header()
     .main-wrapper
@@ -23,6 +24,12 @@ block title
                     +session(order)
                     input(id='s' + order.id type='checkbox').hide-form__input
         +footer('© M&B Corporation')
+        script.
+            moment.locale('ru');
+            $('.info_owner__time').each(function () {
+                $(this).text(moment($(this).text()).fromNow());
+            });
+
 
     if user
         #chat.chat
@@ -43,12 +50,12 @@ block title
 
         if user
             each order in orders
-                if user.name===order.owner.name
+                if user.name === order.owner.name
                     #orderform.orderform
                         .orderform__close(onclick="document.getElementById('orderform').style.display='none'")
                         .orderform__content
                             .orderform__title
-                               .order_title Форма заказа
+                                .order_title Форма заказа
                             .orderform__contact
                                 .info-content__phone
                                     .phone
