@@ -22,7 +22,6 @@ block content
             if user
                 each order in orders
                     +session(order)
-                    input(id='s' + order.id type='checkbox').hide-form__input
         +footer('© M&B Corporation')
 
     if user
@@ -68,8 +67,7 @@ block content
                                         input(type="text" class="adress__adress" value="23")
                             .orderform__dishes
                                 each zakaz in order.orders
-                                    .photo(data-title=zakaz.dish.title)
-                                        img(src=zakaz.dish.image)
+                                    +eda(zakaz.dish.title, zakaz.count, zakaz.dish.price)
                                 each subscriber in order.subscriber
                                     each subDish in subscriber.dishes
                                         .photo(data-title=subDish.title)

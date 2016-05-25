@@ -1,24 +1,6 @@
-mixin subscriber(name, dishes, id, subscriber, order)
+mixin subscriber(order)
     .subscriber
-        .subscriber__name= name
-        .subscriber__checkbox
-            input.subscriber__check-money(id=id type="checkbox" onclick="check()")
-            script.
-                function check() {
-                    var order = !{JSON.stringify(order)};
-                    var subscriber =!{JSON.stringify(subscriber)};
-                    var id =!{JSON.stringify(id)};
-                    var input = document.getElementById(id)
-                    var xhr = new XMLHttpRequest();
-                    xhr.open('POST', '/check');
-                    xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+        img.subscriber__avatar(src=order.owner.avatar)
+        .subscriber__name Алексей Бажин
+        .subscriber__sum 100000 руб.
 
-                    var json = JSON.stringify({
-                        orderId: order._id,
-                        subscriberId: subscriber._id,
-                        inputChecked: input.checked
-                    });
-
-                    xhr.send(json);
-                    return false;
-                }
