@@ -34,13 +34,14 @@ block title
                 form.chat__input
                     img(src=user.avatar)
                     .input_message
-                        input.form-control(autocomplete='off' autofocus style="color: #777;" value="Введите Ваше сообщение.." onfocus="if (this.value == 'Введите Ваше сообщение..') {this.value = ''; this.style.color = '#000';}" onblur="if (this.value == '') {this.value = 'Введите Ваше сообщение..'; this.style.color = '#777';}")
+                        input.form-control(autocomplete='off' style="color: #777;" value="Введите Ваше сообщение.." onfocus="if (this.value == 'Введите Ваше сообщение..') {this.value = ''; this.style.color = '#000';}" onblur="if (this.value == '') {this.value = 'Введите Ваше сообщение..'; this.style.color = '#777';}")
                         +button("Send!", ['button_size-m'], {"type": "submit"})
         script.
             var mainUser = !{JSON.stringify(user)};
         script
             include scripts/chat.js
 
+        if user
             each order in orders
                 if user.name===order.owner.name
                     #orderform.orderform

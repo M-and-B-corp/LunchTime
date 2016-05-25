@@ -22,6 +22,7 @@ img.header_content__avatar
     vertical-align middle
     margin-right 15px
     z-index -1
+    width 50px
 
 .info_owner
     display inline-block
@@ -29,6 +30,11 @@ img.header_content__avatar
 
 .info_owner__time
     font-size 0.8em
+
+.control__chat
+    float left
+    //display inline-block
+    //width 100%
 
 .header_content__button
     display inline-block
@@ -41,27 +47,20 @@ img.header_content__avatar
     font-size 2em
 
 .session__main
-    background url(../images/SouthWest_Burger.jpg) no-repeat
-    background-size 100%
     height 215px
-    color #fff
 
 .main_content__dishes
-    margin-left 10px
+    margin-left 30px
 
 .session__controls
-    //background-color #fff
-    text-align center
-    margin-top 115px
+   display inline-block
+    // text-align center
 
-.control__chat
-    display inline-block
-
-.control__order
+.control
     display inline-block
 
 .session__subscriber
-    background-color red
+    //background-color red
     border-top 1px solid #e5e5e5
 
 .subscriber__title
@@ -81,6 +80,13 @@ img.header_content__avatar
 .subscriber__list
     display none
 
+.main_content__image
+    width 100px
+
 @media (max-width: 630px)
+    .menu-item
+        width 49%
+
+@media (max-width: 770px)
     .session
-        width 70%
+        width 90%
