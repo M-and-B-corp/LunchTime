@@ -18,7 +18,8 @@ var express = require('express'),
     addToShoppingCart = require('../controllers/addToShoppingCart'),
     addOrder = require('../controllers/addOrder'),
     removeFromBasketController = require('../controllers/removeFromBasket.js'),
-    dishCountLessController = require('../controllers/dishCountLess');
+    dishCountLessController = require('../controllers/dishCountLess'),
+    categoryController = require('../controllers/category');
 
 //Authorisation//
 router.get('/auth/fb', passport.authenticate('facebook', {successRedirect: 'back', failureRedirect: '/'}));
@@ -49,5 +50,6 @@ router.get('/basket', function (req, res) {
 });
 router.post('/basket', addOrder);
 router.post('/orders', addToShoppingCart);
+router.post('/category', categoryController);
 
 exports.router = router;

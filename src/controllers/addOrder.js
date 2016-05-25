@@ -7,12 +7,12 @@ module.exports = function (req, res, next) {
         if (err) {
             return next(err);
         }
-        
+
         var orderModel = new OrdersModel({
             owner: req.user,
             orders: req.session.orders,
             service: service,
-            creatingTime: moment().format('HH:mm'),
+            creatingTime: moment(),
             subscriber: []
         });
         

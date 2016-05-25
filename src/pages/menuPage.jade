@@ -12,14 +12,9 @@ block title
 block content
     +header(user)
     .category
-        span Суши
-        span Бургеры
-        span Салаты/Холодные закуски
-        span Первые блюда
-        span Горячее
-        span Гарнир/Соусы
-        span Десерт
-        span Соки/Напитки
+        each category in categories
+            a= category.title
+                input(type='hidden' value=category.href)
 
     .main-wrapper
         .main-wrapper__company
@@ -38,6 +33,7 @@ block content
         +button("Назад к сервисам", [],{'href': '/services?owner=True'})
         +footer("Заказывайте еду на нашей стороне, на темной стороне...")
         script
+            include scripts/category.js
             include scripts/addDish.js
             include scripts/dishCountMore.js
             include scripts/dishCountLess.js
