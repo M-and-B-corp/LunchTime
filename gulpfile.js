@@ -12,6 +12,11 @@ var gulp = require('gulp'),
     parse = require('./src/middleware/parser'),
     mongoose = require('mongoose');
 
+gulp.task('fonts', function () {
+    return gulp.src('./src/fonts/*.ttf')
+        .pipe(gulp.dest('./dist/fonts'))
+});
+
 gulp.task('img', function () {
     return gulp.src('./src/images/**')
         .pipe(gulp.dest('./dist/images'))
@@ -76,5 +81,5 @@ gulp.task('parse', function () {
     //FIXME: Сделать так чтобы задача завершалась без CTRL+C
 });
 
-gulp.task('default', ['stylus', 'jade', 'watch', 'webserver', 'img']);
+gulp.task('default', ['stylus', 'jade', 'watch', 'webserver', 'img', 'fonts']);
 
