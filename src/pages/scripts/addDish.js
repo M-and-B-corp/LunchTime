@@ -60,7 +60,20 @@ function addOrder(title, sum, id) {
         style: 'display: none',
         value: id
     }).appendTo(order);
-    
+
+    var order__cost = $("<div/>", {
+        "class": "order__cost"
+    }).appendTo(order);
+
+    $("<span/>", {
+        "class": "order__cost_val",
+        text: sum
+    }).appendTo(order__cost);
+
+    $("<span/>", {
+        text: ' руб. x '
+    }).appendTo(order__cost);
+
     var order__less = $("<a/>", {
         "class": "order__less"
     }).appendTo(order);
@@ -82,16 +95,16 @@ function addOrder(title, sum, id) {
         "class": "order__icon order__icon_more"
     }).appendTo(order__more);
 
-    var order__cost = $("<div/>", {
-        "class": "order__cost"
+    var order__cost_sum = $("<div/>", {
+        "class": "order__cost_sum"
     }).appendTo(order);
+
+    $("<span/>", {
+        text: ' = '
+    }).appendTo(order__cost_sum);
 
     $("<span/>", {
         "class": "order__cost_val",
         text: sum
-    }).appendTo(order__cost);
-
-    $("<span/>", {
-        text: 'руб'
-    }).appendTo(order__cost);
+    }).appendTo(order__cost_sum);
 }
