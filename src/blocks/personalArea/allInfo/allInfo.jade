@@ -8,21 +8,27 @@ mixin allInfo(user)
                     .phone
                         .phone__title Телефон
                         input(type="text" class="phone__number" value="+375(29)9789355" id="mytext")
+                    hr.info__hr
                     .phone
                         .phone__title Оператор
                         input(type="text" class="phone__operator" value="Vel.")
+                    hr.info__hr
                     .adress
                         .adress__title Улица
                         input(type="text" class="adress__adress" value="Я. Коласа")
+                    hr.info__hr
                     .adress
                         .adress__title Дом
                         input(type="text" class="adress__adress" value="28")
+                    hr.info__hr
                     .adress
                         .adress__title Корпус
                         input(type="text" class="adress__adress" value="б")
+                    hr.info__hr
                     .adress
                         .adress__title Квартира
                         input(type="text" class="adress__adress" value="23")
+                    hr.info__hr
 
         .allInfo__change(onclick="document.getElementById('mytext').setAttribute('disabled', 'disabled');") Изменить
 
