@@ -24,12 +24,6 @@ block content
                     +session(order)
                     input(id='s' + order.id type='checkbox').hide-form__input
         +footer('© M&B Corporation')
-        script.
-            moment.locale('ru');
-            $('.info_owner__time').each(function () {
-                $(this).text(moment($(this).text()).fromNow());
-            });
-
 
     if user
         #chat.chat
@@ -43,10 +37,6 @@ block content
                     .input_message
                         input.form-control(autocomplete='off' style="color: #777;" value="Введите Ваше сообщение.." onfocus="if (this.value == 'Введите Ваше сообщение..') {this.value = ''; this.style.color = '#000';}" onblur="if (this.value == '') {this.value = 'Введите Ваше сообщение..'; this.style.color = '#777';}")
                         +button("Send!", ['button_size-m'], {"type": "submit"})
-        script.
-            var mainUser = !{JSON.stringify(user)};
-        script
-            include scripts/chat.js
 
         if user
             each order in orders
@@ -87,7 +77,11 @@ block content
                             .orderform__input
                                 .input__button
                                     +button("Заказать", [], {"type": "submit"})
-
+    script.
+        var mainUser = !{JSON.stringify(user)};
+    script
+        include scripts/chat.js
+        include scripts/timeInSession.js
 
 
 
