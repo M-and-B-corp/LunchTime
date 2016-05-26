@@ -1,12 +1,13 @@
 mixin button(content, mods, options)
     .button(class=mods)
-        if options && options.href
-            a(href=options.href)
-                button.button__button(class=mods)
+        if options
+            if options.href
+                a(href=options.href)
+                    button.button__button(class=mods)
+                        span.button__title= content
+            else if options.type
+                button.button__button(class=mods, type=options.type)
                     span.button__title= content
-        else if options && options.type && options.name && options.value
-            button.button__button(class=mods, type=options.type, name=options.name, value=options.value)
-                span.button__title= content
         else
             button.button__button(class=mods)
                 span.button__title= content
