@@ -13,8 +13,9 @@ mixin session(order)
                     .info_owner__time= order.creatingTime
                 .control__chat(onclick="document.getElementById('chat').style.display='block'")
                     +button("Чат", [], {"type": "submit"})
-                if user._id + '' == order.owner._id + ''
-                    img(src="../images/total/close.png" class="header_content__button" onclick="document.getElementById('session').style.display='none'")
+                if user
+                    if user._id + '' == order.owner._id + ''
+                        img(src="../images/total/close.png" class="header_content__button" onclick="document.getElementById('session').style.display='none'")
 
         .session__main
             .main_content
@@ -37,20 +38,11 @@ mixin session(order)
                                     input(type="hidden", name="orderId" value=order._id)
                                     +button("Присоединиться", [], {"type": "submit", "name": "action", "value": "menu"})
 
-        .session__subscriber
-            .subscriber__title
-                .title__title Моё меню
-                img(src="../images/menu.png" class="title__menu")
-                each zakaz in order.orders
-                    +eda(zakaz.dish.title, zakaz.count, zakaz.dish.price)
-
-        script.
-            function openbox(id) {
-                var display = document.getElementById(id).style.display;
-
-                if (display == 'none') {
-                    document.getElementById(id).style.display = 'block';
-                } else {
-                    document.getElementById(id).style.display = 'none';
-                }
-            }
+        if user
+            .session__subscriber
+                .subscriber__title
+                    .title__title Моё меню
+                    img(src="../images/menu.png" class="title__menu")
+                    .subscriber__eda
+                        each zakaz in order.orders
+                            +eda(zakaz.dish.title, zakaz.count, zakaz.dish.price)

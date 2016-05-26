@@ -19,9 +19,8 @@ block content
         +header()
     .main-wrapper
         .main-page
-            if user
-                each order in orders
-                    +session(order)
+            each order in orders
+                +session(order)
         +footer('© M&B Corporation')
 
     if user
