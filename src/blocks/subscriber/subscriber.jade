@@ -1,6 +1,8 @@
 mixin subscriber(order)
     .subscriber
         img.subscriber__avatar(src=order.owner.avatar)
-        .subscriber__name Алексей Бажин
-        .subscriber__sum 100000 руб.
+        .subscriber__person
+            .subscriber__name Алексей Бажин
+                .subscriber__paid (оплачено)
+            .subscriber__sum 100000 руб.
 

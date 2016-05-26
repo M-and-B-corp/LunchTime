@@ -11,10 +11,10 @@ block title
     title Страница компании
 block content
     +header(user)
-    .category
+    #category.category
         each category in categories
-            a= category.title
-                input(type='hidden' value=category.href)
+            input(type='radio' value=category.href id=category._id name="category")
+            label(for=category._id)= category.title
 
     .main-wrapper
         .main-wrapper__company
@@ -24,14 +24,16 @@ block content
                     form(name='dishForm' action="/orders", method="post").main-wrapper__menuitem
                         input(type="hidden", name="dishId" value=dish._id)
                         +menuitem(dish)
-            #box.main-wrapper__cart(style="display: none;")
-                span.main-wrapper__title Корзина
-                +basket(orders, serviceId)
-        .cart_menu(onclick="openBox('box')")
-            +button("Корзина", [], {"type": "submit"})
+            .main-wrapper__cart
+                span.main-wrapper__title_cart Корзина
+                    img(src="../images/down.png")
+                    .main-wrapper__title_info
+                        span.main-wrapper__title_sum Общая стоимость: 10000 руб.
+                        span.main-wrapper__title_count Кол-во: 5
+                #box.main-wrapper__basket(style="display: none;")
+                    +basket(orders, serviceId)
 
-        +button("Назад к сервисам", [],{'href': '/services?owner=True'})
-        +footer("Заказывайте еду на нашей стороне, на темной стороне...")
+        +footer('© M&B Corporation')
         script
             include scripts/category.js
             include scripts/addDish.js

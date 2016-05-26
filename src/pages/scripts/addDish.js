@@ -71,12 +71,12 @@ function addOrder(title, sum, id) {
     }).appendTo(order__cost);
 
     $("<span/>", {
-        text: ' руб. x '
+        text: ' руб.'
     }).appendTo(order__cost);
 
     var order__less = $("<a/>", {
         "class": "order__less"
-    }).appendTo(order);
+    }).appendTo(order__cost_val);
 
     $("<i/>", {
         "class": "order__icon order__icon_less"
@@ -98,10 +98,6 @@ function addOrder(title, sum, id) {
     var order__cost_sum = $("<div/>", {
         "class": "order__cost_sum"
     }).appendTo(order);
-
-    $("<span/>", {
-        text: ' = '
-    }).appendTo(order__cost_sum);
 
     $("<span/>", {
         "class": "order__cost_val",

@@ -7,7 +7,6 @@ mixin basket(orders, serviceId)
             .orders
                 each item in orders
                     +order(item.title, item.price)
-            hr.basket__hr
             .basket__allcost
                 span.total_sum
             .basket__button

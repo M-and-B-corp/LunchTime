@@ -18,17 +18,28 @@
     padding-top 5px
     padding-bottom 5px
     box-shadow 0 2px 4px 0 rgba(0,0,0,.15)
+    z-index 3
+
+.category label
+    margin 20px
+    cursor pointer
+
+.category input[type="radio"]
+    display none
+
+.category input[type="radio"]
+    &:checked + label
+        font-weight bold
+        border-bottom 2px solid buttons
 
 .sticky
     position fixed
-    top: 0
-    z-index: 101
+    top 0
+    z-index 101
 
-.category span
-    margin 10px
-    white-space pre-wrap
-    &:hover
-       border-bottom 2px solid #427fed
-    &:active
-        border-bottom 2px solid #427fed
-        font-weight bold
+.cart_menu
+    width 80px
+    position fixed
+    right 20px
+    bottom 0
+    background-color buttons
