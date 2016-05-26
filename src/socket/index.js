@@ -19,9 +19,9 @@ function loadSession(sid, callback) {
 
 function loadUser(session, callback) {
 
-    if (!session.passport.user) {
+    if (!session.passport) {
         console.log("Session %s is anonymous", session.id);
-        return callback(null, null);
+        return callback(new Error("No user!"));
     }
 
     User.findOne({_id: session.passport.user}, function (err, user) {
