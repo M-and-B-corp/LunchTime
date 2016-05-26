@@ -10,7 +10,11 @@ var orderSchema = new Schema({
     orders: [{count: String, dish: {type: Schema.Types.ObjectId, ref: 'Dish'}}],
     service: serviceSchema,
     creatingTime: String,
-    subscriber: [{person: personSchema, dishes: [{type: Schema.Types.ObjectId, ref: 'Dish'}], paid: Boolean}]
+    subscriber: [{
+        person: personSchema, 
+        orders: [{count: String, dish: {type: Schema.Types.ObjectId, ref: 'Dish'}}], 
+        paid: Boolean
+    }]
 });
 
 module.exports = {

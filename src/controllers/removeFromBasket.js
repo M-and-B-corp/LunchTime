@@ -1,5 +1,5 @@
 module.exports = function (req, res) {
-    req.session.orders = req.session.orders.filter(function (order) {
+    req.session.cart.orders = req.session.cart.orders.filter(function (order) {
         return order.dish._id != req.body.id;
     });
 

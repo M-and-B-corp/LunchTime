@@ -3,8 +3,6 @@ var express = require('express'),
     passport = require('passport'),
 
     //Index//
-    myMenu = require('../controllers/myMenu'),
-    wantSame = require('../controllers/wantSame.js'),
     homeController = require('../controllers/home.js'),
     personalAreaController = require('../controllers/personalArea.js'),
     toOrderController = require('../controllers/toOrder.js'),
@@ -12,7 +10,7 @@ var express = require('express'),
 
     //Services//
     servicesController = require('../controllers/services.js'),
-    serviceController = require('../controllers/menuPage.js'),
+    menuPageController = require('../controllers/menuPage.js'),
     
     //MenuPage//
     addToShoppingCart = require('../controllers/addToShoppingCart'),
@@ -34,21 +32,16 @@ router.get('/logout', function (req, res) {
 router.get('/', homeController);
 router.get('/personal_area', personalAreaController);
 router.post('/check', checkController);
-router.post('/wantAlso', wantSame);
-router.post('/mymenu', myMenu);
 router.post('/toOrder', toOrderController);
 
 //Services//
 router.get('/services', servicesController);
 
 //MenuPage//
-router.get('/services/:id', serviceController);
+router.get('/menuPage?', menuPageController);
 router.post('/removeFromBasket', removeFromBasketController);
 router.post('/dishCountLess', dishCountLessController);
-router.get('/basket', function (req, res) {
-    res.render('/', {order: req.session.order});
-});
-router.post('/basket', addOrder);
+router.get('/basket', addOrder);
 router.post('/orders', addToShoppingCart);
 router.post('/category', categoryController);
 

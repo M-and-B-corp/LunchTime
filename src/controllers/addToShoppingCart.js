@@ -4,7 +4,7 @@ module.exports = function (req, res) {
     DishModel.findOne({_id: req.body.dishId}, function (err, dish) {
         var addedOrder = {};
         var emptyOrder = true;
-        req.session.orders = req.session.orders.map(function (order) {
+        req.session.cart.orders = req.session.cart.orders.map(function (order) {
             if (order.dish._id == req.body.dishId) {
                 order.count = order.count + 1;
                 addedOrder = order;
@@ -19,7 +19,7 @@ module.exports = function (req, res) {
                 dish: dish,
                 count: 1
             };
-            req.session.orders.push(addedOrder);
+            req.session.cart.orders.push(addedOrder);
         }
         
         res.send(addedOrder.dish);
