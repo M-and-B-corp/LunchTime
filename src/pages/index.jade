@@ -14,13 +14,13 @@ block title
 block content
     if user
         +header(user)
-        +button("+", ["button_new-order"],{'href': '/services?owner=True'})
+        +button("+", ["button_new-order"],{'href': '/services/'})
     else
         +header()
     .main-wrapper
         .main-page
-            each order in orders
-                +session(order)
+                each order in orders
+                    +session(order)
         +footer('© M&B Corporation')
 
     if user
@@ -68,7 +68,7 @@ block content
                                 each zakaz in order.orders
                                     +eda(zakaz.dish.title, zakaz.count, zakaz.dish.price)
                                 each subscriber in order.subscriber
-                                    each subDish in subscriber.dishes
+                                    each subDish in subscriber.orders
                                         .photo(data-title=subDish.title)
                                             img(src=subDish.image)
                             .orderform__input
@@ -79,7 +79,3 @@ block content
     script
         include scripts/chat.js
         include scripts/timeInSession.js
-
-
-
-

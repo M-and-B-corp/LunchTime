@@ -2,23 +2,27 @@ var DishModel = require('../models/dish').model,
     CategoryModel = require('../models/category').model;
 
 module.exports = function (req, res, next) {
-    DishModel.find({_serviceId: req.params.id, category: '/burgers'}).exec(function (err, dishes) {
+    DishModel.find({_serviceId: req.query.serviceId, category: '/burgers'}, function (err, itemDishes) {
         CategoryModel.find({}, function (err, categories) {
             if (err) return next(err);
-
-            var ordersInBasket = [];
-            
-            if (req.session.orders && req.session.orders[0] && 
-                req.session.orders[0].dish._serviceId + '' == req.params.id + '') {
-                ordersInBasket = req.session.orders.map(function (order) {
-                    return order.dish;
-                });
-            } else {
-                req.session.orders = [];
+            console.log('query: ', req.query.isOwner == 'true');
+            if (!req.session.cart || !req.session.cart.orders) {
+                if (req.query.isOwner == 'true') {
+                    req.session.cart = {
+                        orders: [],
+                        serviceId: req.query.serviceId,
+                        isOwner: 'true'
+                    };
+                } else {
+                    req.session.cart = {
+                        orders: [],
+                        orderId: req.query.orderId,
+                        isOwner: 'false'
+                    };
+                }
             }
 
-            res.render('menuPage', {serviceId: req.params.id, dishes: dishes,
-                orders: ordersInBasket, categories: categories});
+            res.render('menuPage', {dishes: itemDishes, categories: categories, orders: req.session.cart.orders});
         });
     });
 };
