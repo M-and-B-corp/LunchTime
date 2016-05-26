@@ -13,6 +13,5 @@ block content
     .main-wrapper
         .main-wrapper__carry
             each service in services
-                +offers(service, "")
-                    +button("Сделать заказ", "offers-plugin__button", {href: "/services/" + service._id})
+                +offers(service)
         +footer('© M&B Corporation')

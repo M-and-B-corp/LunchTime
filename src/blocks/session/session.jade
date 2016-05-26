@@ -13,9 +13,8 @@ mixin session(order)
                     .info_owner__time= order.creatingTime
                 .control__chat(onclick="document.getElementById('chat').style.display='block'")
                     +button("Чат", [], {"type": "submit"})
-                if user
-                    if user._id + '' == order.owner._id + ''
-                        img(src="../images/total/close.png" class="header_content__button" onclick="document.getElementById('session').style.display='none'")
+                if user && user._id + '' == order.owner._id + ''
+                    img(src="../images/total/close.png" class="header_content__button" onclick="document.getElementById('session').style.display='none'")
 
         .session__main
             .main_content
@@ -28,15 +27,12 @@ mixin session(order)
             .session__controls
                 if user
                     .control
-                        if user._id + '' == order.owner._id + ''
-                            .control__order
+                        .control__order
+                            if user && user._id + '' == order.owner._id + ''
                                 form(action="/toOrder", method="post")
-                                    +button("Заказать", [], {"type": "submit", "name": "action", "value": "menu"})
-                        else
-                            .control__order
-                                form(action="/mymenu", method="post")
-                                    input(type="hidden", name="orderId" value=order._id)
-                                    +button("Присоединиться", [], {"type": "submit", "name": "action", "value": "menu"})
+                                    +button("Заказать", [], {"type": "submit"})
+                            else
+                                +button("Присоединиться", [], {'href': '/menuPage?isOwner=false&orderId=' + order._id + '&serviceId=' + order.service._id})
 
         if user
             .session__subscriber
