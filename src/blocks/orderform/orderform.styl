@@ -1,7 +1,7 @@
 .orderform
   width 100%
   min-height 100%
-  background-color rgba(255,255,255,0.75)
+  background-color rgba(255,255,255,0.6)
   overflow hidden
   position fixed
   top 0
@@ -14,11 +14,10 @@
 .orderform__close
   width 50px
   height 50px
-  background url(../../images/total/close.png) no-repeat
   background-size cover
-  position absolute
-  right 0
-  &:active .chat__title
+  display inline-block
+  cursor pointer
+  &:active .orderform__title
     display none
 
 .orderform__title
@@ -27,13 +26,16 @@
   //padding-left 52px
   padding-top 1px
   padding-bottom 1px
+  display inline-block
 
 .order_title
   margin 20px
+  margin-top 10px
+  display inline-block
 
 .orderform__content
   margin 40px auto 0 auto
-  background-color #fff
+  background-color #f5f5f5
   border-radius 2px
   box-shadow 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12)
   width 70%
@@ -43,6 +45,7 @@
   //height 80%
   padding-top 20px
   padding-left 10px
+  padding-right 10px
 
 .orderform_input
   background-color #efefef

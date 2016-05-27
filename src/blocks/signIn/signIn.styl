@@ -1,4 +1,4 @@
-.chat
+.signIn
   width 100%
   min-height 100%
   background-color rgba(255,255,255,0.95)
@@ -11,20 +11,22 @@
   margin 0
   padding 0
 
-.chat__close img
+.signIn__close img
   width 40px
   height 40px
   display inline-block
   vertical-align middle
   cursor pointer
 
-.chat__close
+.signIn__close
+  //background url(../../images/total/close.png) no-repeat
+  //background-size cover
   float right
   display inline-block
-  &:active .chat__title
+  &:active .signIn__title
     display none
 
-.chat__title
+.signIn__title
   background-color #e5e5e5
   width 100%
   height 35px
@@ -38,22 +40,18 @@
   color #151515
   display inline-block
 
-.chat__content
-  margin 40px auto 0 auto
+.signIn__content
+  margin 120px auto 0 auto
   background-color #fff
   border-radius 2px
   box-shadow 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)
-  height 500px
-  width 70%
+  height 380px
+  width 30%
 
-.chat__history
-  width 100%
-  height 70%
-  margin 0 auto
+.signIn__history
   padding-top 20px
-  overflow-y auto
 
-.chat__input
+.signIn__input
   background-color #efefef
 
 .input_message
@@ -62,18 +60,18 @@
   vertical-align middle
   margin-bottom 40px
 
-.chat__hr
+.signIn__hr
   width 75%
   margin 0 auto
 
-.chat__input input
+.signIn__input input
   margin-left 10px
   margin-right 10px
   width 70%
   display inline-block
   vertical-align middle
 
-.chat__input img
+.signIn__input img
   border-radius 50%
   margin 5px
   display inline-block
@@ -84,6 +82,52 @@ input.form-control
   outline none
   background #efefef
 
+.signIn__name
+  width 100%
+  margin-top 10px
+  margin-bottom 10px
+  text-align center
+
+.signIn__input
+  height 25px
+
+.signIn__surname
+  width 100%
+  text-align center
+  margin-top 20px
+  margin-bottom 10px
+
+.signIn__button
+  text-align center
+  margin-top 20px
+  margin-bottom 10px
+
+.history__input
+  text-align center
+  margin-top 20px
+  margin-bottom 10px
+
+.signIn__or
+  text-align center
+
+.signIn__login
+  text-align center
+
+.signIn__login span
+  vertical-align middle
+
+.login__sites
+  margin 5px
+
 @media (max-width: 875px)
-  .chat__input input
+  .signIn__input input
     width 35%
+
+@media (max-width: 870px)
+  .signIn__content
+    width 50%
+
+@media (max-width: 540px)
+  .signIn__content
+    width 80%
+
