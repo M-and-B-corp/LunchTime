@@ -6,85 +6,82 @@ include ../eda/eda
 mixin session(order)
     .session
         input.session_id(type='hidden' value=order.id)
-        .session__header
-            .header_content
-                img.header_content__avatar(src=order.owner.avatar)
-                .info_owner
-                    .info_owner__name= order.owner.name
-                    .info_owner__time Сделал заказ на
-                        .info_owner__session_time 10:10
+        if user
+            if user._id + '' == order.owner._id + ''
+                .session__header.session_header-self
+                    .header_content
+                        img.header_content__avatar(src=order.owner.avatar)
+                        .info_owner
+                            .info_owner__name= order.owner.name
+                            .info_owner__time Сделал заказ на
+                                .info_owner__session_time 10:10
+                        .header_content__order
+                            a(href='')
+                                img(src="../images/order.png")
+                        a.control__chat(href='' onclick="document.getElementById('chat').style.display='block'; return false;")
+                            img(src="../images/chat.png")
+                        a.header_content__close(href='')
+                                img.header_content__button(src='../images/total/close.png')
 
-                .header_content__order
-                    if user && user._id + '' == order.owner._id + ''
-                        form(action="/toOrder", method="post")
-                            img(src="../images/order.png")
+            else
+                .session__header
+                    .header_content
+                        img.header_content__avatar(src=order.owner.avatar)
+                        .info_owner
+                            .info_owner__name= order.owner.name
+                            .info_owner__time Сделал заказ на
+                                .info_owner__session_time 10:10
+                        a.control__chat(href='' onclick="document.getElementById('chat').style.display='block'; return false;")
+                            img(src="../images/chat.png")
+                        .header_content__add
+                            a(href='/menuPage?whoIsIt=subscriber&orderId=' + order._id + '&serviceId=' + order.service._id)
+                                img(src="../images/add.png" href='/menuPage?isOwner=false&orderId=' + order._id + '&serviceId=' + order.service._id)
+        else
+            .session__header
+                .header_content
+                    img.header_content__avatar(src=order.owner.avatar)
+                    .info_owner
+                        .info_owner__name= order.owner.name
+                        .info_owner__time Сделал заказ на
+                            .info_owner__session_time 10:10
 
-                .control__chat(onclick="document.getElementById('chat').style.display='block'")
-                    img(src="../images/chat.png")
-                if user && user._id + '' == order.owner._id + ''
-                    a.header_content__close(href='/removeOrder?orderId=' + order._id)
-                        img(src='../images/total/close.png' class='header_content__button' onclick="document.getElementById('session').style.display='none'")
-                else
-                    .header_content__add
-                        img(src="../images/add.png" href='/menuPage?isOwner=false&orderId=' + order._id + '&serviceId=' + order.service._id)
-
-                script.
-                    var close = $('.header_content__close');
-                    close.on('click', removeOrder);
-
-                    function removeOrder() {
-                        var order = $(this).parent().parent().parent();
-
-                        $.ajax({
-                            data: {
-                                id: order.find('.session_id').val()
-                            },
-                            method: 'post',
-                            url: '/removeOrder'
-                        }).done(function () {
-                            close.off('click', removeOrder);
-                            order.remove();
-                        });
-                        return false;
-                    };
         .session__main
             .main_content
                 .main_content__dishes Подписчики
                     each subscriber in order.subscribers
                         +subscriber(subscriber)
-            .session__controls
-                .control
-                    .control__order
-                        if user && user._id + '' == order.owner._id + ''
-                            form(action='/toOrder', method='post')
-                                +button('Заказать', [], {'type': 'submit'})
-                        else
-                            +button('Присоединиться', [], {'href': '/menuPage?whoIsIt=subscriber&orderId=' + order._id + '&serviceId=' + order.service._id})
 
-        .session__subscriber
-            .subscriber__title
-                -console.log(user);
-                -console.log(order.owner);
-                if user && user._id + '' == order.owner._id + ''
-                    .title__title Ваш заказ
-                    a(href='/menuPage?whoIsIt=fickleOwner&orderId=' + order._id + '&serviceId=' + order.service._id)
-                        img(src='../images/menu.png' class='title__menu')
-                    .subscriber__eda
-                        each zakaz in order.orders
-                            +eda(zakaz.dish.title, zakaz.count, zakaz.dish.price, zakaz.dish._id)
-                else
-                    each subscriber in order.subscribers
-                        if user && user._id + '' == subscriber.person._id + ''
-                            .title__title Ваш заказ
-                            a(href='/menuPage?whoIsIt=fickleSubscriber&orderId=' + order._id + '&serviceId=' + order.service._id)
-                                img(src='../images/menu.png' class='title__menu')
-                            img(src="../images/total/close.png" class="title__close")
-                            .subscriber__eda
-                                each zakaz in subscriber.orders
-                                    +eda(zakaz.dish.title, zakaz.count, zakaz.dish.price, zakaz.dish._id)
-                            hr
+        if user
+            if user._id + '' == order.owner._id + ''
+                .session__subscriber
+                    .subscriber__title
+                        .title__title Ваш заказ
+
+                        a(href='/menuPage?whoIsIt=fickleOwner&orderId=' + order._id + '&serviceId=' + order.service._id)
+                            img(src='../images/menu.png' class='title__menu')
+
+                        .subscriber__eda
+                            each zakaz in order.orders
+                                +eda(zakaz.dish.title, zakaz.count, zakaz.dish.price, zakaz.dish._id)
+                        hr
+                        .full_sum
+                            .subscriber__allcost Общая стоимость заказа:
+                                .allcost__sum= order.paymentSum + ' руб.'
+            else
+                each subscriber in order.subscribers
+                    if user._id + '' == subscriber.person._id + ''
+                        .session__subscriber
+                            input.subscriber_id(type='hidden' value=subscriber.id)
+                            .subscriber__title
+                                .title__title Ваш заказ
+                                a(href='/menuPage?whoIsIt=fickleSubscriber&orderId=' + order._id + '&serviceId=' + order.service._id)
+                                    img(src='../images/menu.png' class='title__menu')
+                                a.subscriber_header__close(href='')
+                                    img(src="../images/total/close.png" class="title__close")
+                                .subscriber__eda
+                                    each zakaz in subscriber.orders
+                                        +eda(zakaz.dish.title, zakaz.count, zakaz.dish.price, zakaz.dish._id)
+                                hr
                                 .full_sum
                                     .subscriber__allcost Общая стоимость заказа:
-                                        .allcost__sum 100000 руб.
-
-
+                                        .allcost__sum= subscriber.paymentSum + ' руб.'

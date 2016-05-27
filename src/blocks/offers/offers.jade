@@ -2,8 +2,8 @@ include ../company/company
 include ../company-info/company-info
 
 mixin offers(service)
-    a(href="/menuPage?isOwner=true&serviceId="+service._id)
-        .offers
+        .offers(href="/menuPage?isOwner=true&serviceId="+service._id)
+            a.offers__link(href="/menuPage?whoIsIt=owner&serviceId="+service._id)
             +company(service.logo)
             .offers__info
                 .offers__title= service.title

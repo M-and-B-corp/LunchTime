@@ -8,6 +8,7 @@ var express = require('express'),
     toOrderController = require('../controllers/toOrder.js'),
     checkController = require('../middleware/check.js'),
     removeOrderController = require('../controllers/removeOrder.js'),
+    removeSubscriberController = require('../controllers/removeSubscriber.js'),
     
     //Services//
     servicesController = require('../controllers/services.js'),
@@ -36,6 +37,7 @@ router.post('/check', checkController);
 router.post('/toOrder', toOrderController);
 router.get('/menuPage?', menuPageController);
 router.post('/removeOrder', removeOrderController);
+router.post('/removeSubscriber', removeSubscriberController);
 
 //Services//
 router.get('/services', servicesController);

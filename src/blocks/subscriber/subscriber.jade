@@ -1,10 +1,22 @@
 mixin subscriber(subscriber)
-    .subscriber
-        img.subscriber__avatar(src=subscriber.person.avatar)
-        .subscriber__person
-            .subscriber__name= subscriber.person.name
+    if user._id + '' == subscriber.person._id + ''
+        .subscriber.subscriber-self
+            input.subscriber_id(type='hidden' value=subscriber._id)
+            img.subscriber__avatar(src=subscriber.person.avatar)
+            .subscriber__person
+                .subscriber__name= subscriber.person.name
+                    if (subscriber.paid)
+                        .subscriber__paid (оплачено)
+                    else
+                        .subscriber__paid (не оплачено)
+                .subscriber__sum= subscriber.paymentSum + ' руб.'
+    else
+        .subscriber
+            img.subscriber__avatar(src=subscriber.person.avatar)
+            .subscriber__person
+                .subscriber__name= subscriber.person.name
                 if (subscriber.paid)
                     .subscriber__paid (оплачено)
                 else
                     .subscriber__paid (не оплачено)
-            .subscriber__sum= subscriber.paymentSum + ' руб.'
+                .subscriber__sum= subscriber.paymentSum + ' руб.'

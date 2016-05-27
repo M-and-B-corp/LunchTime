@@ -3,7 +3,7 @@ include ../order/order
 mixin basket(orders)
     .basket
         .orders
-            each item in orders
+            each order in orders
                 +order(order.dish.title, order.dish.price, order.dish._id, order.count)
         .basket__allcost
             span.total_sum
