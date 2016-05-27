@@ -8,11 +8,13 @@ var personSchema = require('./person').schema;
 var orderSchema = new Schema({
     owner: personSchema,
     orders: [{count: String, dish: {type: Schema.Types.ObjectId, ref: 'Dish'}}],
+    paymentSum: String,
     service: serviceSchema,
     creatingTime: String,
-    subscriber: [{
+    subscribers: [{
         person: personSchema, 
         orders: [{count: String, dish: {type: Schema.Types.ObjectId, ref: 'Dish'}}], 
+        paymentSum: String,
         paid: Boolean
     }]
 });

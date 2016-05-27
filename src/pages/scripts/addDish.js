@@ -10,9 +10,8 @@ function sendForm() {
     }).done(function (dish) {
         var dishInOrders = false;
         $('.order').each(function () {
-            if ($(this).find('.order__input').eq(0).val() == dish._id) {
+            if ($(this).find('.order__id').eq(0).val() == dish._id) {
                 $(this).find('.order__value').eq(0).text(+$(this).find('.order__value').eq(0).text() + 1);
-                
                 dishInOrders = true;
             }
         });
@@ -38,10 +37,21 @@ function sendForm() {
 
 function addOrder(title, sum, id) {
     var order = $("<div/>", {
-        "class": "order",
-        id: id
+        "class": "order"
     }).appendTo($('.orders'));
 
+    $("<input/>", {
+        'class': 'order__price',
+        type: 'hidden',
+        value: sum
+    }).appendTo(order);
+
+    $("<input/>", {
+        "class": "order__id",
+        type: 'hidden',
+        value: id
+    }).appendTo(order);
+    
     var order__close = $("<a/>", {
         "class": "order__close"
     }).appendTo(order);
@@ -52,31 +62,12 @@ function addOrder(title, sum, id) {
 
     $("<div/>", {
         "class": "order__info",
-        text: title
+        text: title + ' (' + sum + ' руб.)'
     }).appendTo(order);
-
-    $("<input/>", {
-        "class": "order__input",
-        style: 'display: none',
-        value: id
-    }).appendTo(order);
-
-    var order__cost = $("<div/>", {
-        "class": "order__cost"
-    }).appendTo(order);
-
-    $("<span/>", {
-        "class": "order__cost_val",
-        text: sum
-    }).appendTo(order__cost);
-
-    $("<span/>", {
-        text: ' руб.'
-    }).appendTo(order__cost);
 
     var order__less = $("<a/>", {
         "class": "order__less"
-    }).appendTo(order__cost_val);
+    }).appendTo(order);
 
     $("<i/>", {
         "class": "order__icon order__icon_less"
@@ -94,13 +85,4 @@ function addOrder(title, sum, id) {
     $("<i/>", {
         "class": "order__icon order__icon_more"
     }).appendTo(order__more);
-
-    var order__cost_sum = $("<div/>", {
-        "class": "order__cost_sum"
-    }).appendTo(order);
-
-    $("<span/>", {
-        "class": "order__cost_val",
-        text: sum
-    }).appendTo(order__cost_sum);
 }

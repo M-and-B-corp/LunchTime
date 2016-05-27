@@ -28,10 +28,10 @@ block content
                 span.main-wrapper__title_cart Корзина
                     img(src="../images/down.png")
                     .main-wrapper__title_info
-                        span.main-wrapper__title_sum Общая стоимость: 10000 руб.
-                        span.main-wrapper__title_count Кол-во: 5
+                        span.main-wrapper__title_sum Общая стоимость: 0 руб.
+                        span.main-wrapper__title_count Кол-во: 0
                 #box.main-wrapper__basket(style="display: none;")
-                    +basket(orders, serviceId)
+                    +basket(orders)
 
         +footer('© M&B Corporation')
         script
@@ -39,7 +39,7 @@ block content
             include scripts/addDish.js
             include scripts/dishCountMore.js
             include scripts/dishCountLess.js
-            include scripts/totalSum.js
+            include scripts/updateSum.js
             include scripts/openBox.js
             include scripts/removeDish.js
             include scripts/fixedCategory.js

@@ -3,44 +3,88 @@ var ServiceModel = require('../models/service').model;
 var moment = require('moment');
 
 module.exports = function (req, res, next) {
-    console.log('cart: ', req.session.cart);
-    
-    if (req.session.cart.isOwner == 'true') {
-        console.log('owner - true');
+    if (req.session.cart.whoIsIt == 'owner') {
         ServiceModel.findOne({_id: req.session.cart.serviceId}, addOwnerOrder);
-    } else {
-        console.log('owner - false');
+
+    } else if (req.session.cart.whoIsIt == 'subscriber') {
         OrderModel.findOne({_id: req.session.cart.orderId}, addSubscriberOrder);
+
+    } else if (req.session.cart.whoIsIt == 'fickleSubscriber') {
+        OrderModel.findOne({_id: req.session.cart.orderId}, addFickleSubscriber);
+
+    } else if (req.session.cart.whoIsIt == 'fickleOwner') {
+        OrderModel.findOne({_id: req.session.cart.orderId}, addFickleOwner);
     }
 
     function addOwnerOrder(err, service) {
         if (err) return next(err);
 
+        var totalSum = req.session.cart.orders.reduce(function (sum, order) {
+            return sum + +order.dish.price * +order.count;
+        }, 0);
+
         var orderModel = new OrderModel({
             owner: req.user,
             orders: req.session.cart.orders,
+            paymentSum: totalSum,
             service: service,
-            creatingTime: moment(),
+            creatingTime: moment().format('HH:mm'),
             subscriber: []
         });
 
         orderModel.save(function () {
             delete req.session.cart;
-            
+
             res.redirect('/');
         });
     }
 
     function addSubscriberOrder(err, order) {
-        if (err) next(new Error('Не создался подписчик'));
+        if (err) next(err);
 
-        order.subscriber.push({
+        var totalSum = req.session.cart.orders.reduce(function (sum, order) {
+            return sum + +order.dish.price * +order.count;
+        }, 0);
+
+        order.subscribers.push({
             person: req.user,
             orders: req.session.cart.orders,
+            paymentSum: totalSum,
             paid: false
         });
 
+        order.save(function () {
+            delete req.session.cart;
+
+            res.redirect('/');
+        });
+    }
+
+    function addFickleOwner(err, order) {
+        if (err) next(err);
+
+        order.orders = req.session.cart.orders;
+        
         order.save(function (err) {
+            if (err) next(err);
+
+            delete req.session.cart;
+
+            res.redirect('/');
+        });
+    }
+
+    function addFickleSubscriber(err, order) {
+        if (err) next(err);
+
+        order.subscribers.forEach(function (subscriber) {
+            if (subscriber.person._id + '' == req.user._id + '')
+                subscriber.orders = req.session.cart.orders;
+        });
+
+        order.save(function (err) {
+            if (err) next(err);
+
             delete req.session.cart;
 
             res.redirect('/');

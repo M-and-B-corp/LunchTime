@@ -2,13 +2,13 @@ include ../company/company
 include ../company-info/company-info
 
 mixin offers(service)
-    .offers(href="/menuPage?isOwner=true&serviceId="+service._id)
-        +company(service.logo)
-        .offers__info
-            a.offers__title(href="/menuPage?isOwner=true&serviceId="+service._id)= service.title
-            +company-info(service)
-            .offers__down-text
-                each phone in service.phone
-                    .offers__text= phone
-            //.offers__button
-            //    +button("Сделать заказ", "offers-plugin__button", {href: "/menuPage?isOwner=true&serviceId="+service._id})
+    a(href="/menuPage?isOwner=true&serviceId="+service._id)
+        .offers
+            +company(service.logo)
+            .offers__info
+                .offers__title= service.title
+                +company-info(service)
+                .offers__down-text
+                    each phone in service.phone
+                        .offers__text= phone
+

@@ -67,14 +67,15 @@ block content
                             .orderform__dishes
                                 each zakaz in order.orders
                                     +eda(zakaz.dish.title, zakaz.count, zakaz.dish.price)
-                                each subscriber in order.subscriber
+                                each subscriber in order.subscribers
                                     each subDish in subscriber.orders
                                         .photo(data-title=subDish.title)
                                             img(src=subDish.image)
                             .orderform__input
                                 .input__button
                                     +button("Заказать", [], {"type": "submit"})
-    script.
-        var mainUser = !{JSON.stringify(user)};
-    script
-        include scripts/chat.js
+    if user
+        script.
+            var mainUser = !{JSON.stringify(user)};
+        script
+            include scripts/chat.js

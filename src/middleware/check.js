@@ -6,7 +6,7 @@ module.exports = function(req, res) {
         if (err) {
             return next(err);
         }
-        order.subscriber.forEach(function (sub) {
+        order.subscribers.forEach(function (sub) {
             if (sub._id == req.body.subscriberId) {
                 sub.paid = req.body.inputChecked;
             }
