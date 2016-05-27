@@ -9,6 +9,7 @@ var socket = io.connect('', {
 socket
     .on('message', function (username, message, avatar, time) {
         printMessage(username, message, avatar, time);
+        $('.chat__history').scrollTop($('.chat__history')[0].scrollHeight);
     })
 
     .on('connect', function () {
@@ -38,6 +39,8 @@ function sendMessage() {
     var time = moment().format('HH:mm');
     socket.emit('message', text, function () {
         printMessage(mainUser.name, text, mainUser.avatar, time);
+
+        $('.chat__history').scrollTop($('.chat__history')[0].scrollHeight);
     });
     input.val('');
     return false;

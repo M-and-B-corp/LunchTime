@@ -3,7 +3,7 @@ var OrderModel = require('../models/order').model;
 module.exports = function(req, res, next) {
     OrderModel.find({})
         .populate("orders.dish")
-        .populate("subscriber.dishes")
+        .populate("subscribers.orders.dish")
         .exec(function (err, orders) {
             if (err) {
                 return next(err);
@@ -22,10 +22,10 @@ module.exports = function(req, res, next) {
                     if (b.owner.id == req.user.id) {
                         return 1;
                     }
-                     if (isSubscriber(a.subscriber)) {
+                     if (isSubscriber(a.subscribers)) {
                         return -1;
                      }
-                     if (isSubscriber(b.subscriber)) {
+                     if (isSubscriber(b.subscribers)) {
                         return 1;
                     }
                     return 0;

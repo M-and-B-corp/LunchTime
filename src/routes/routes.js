@@ -7,7 +7,9 @@ var express = require('express'),
     personalAreaController = require('../controllers/personalArea.js'),
     toOrderController = require('../controllers/toOrder.js'),
     checkController = require('../middleware/check.js'),
-
+    removeOrderController = require('../controllers/removeOrder.js'),
+    removeSubscriberController = require('../controllers/removeSubscriber.js'),
+    
     //Services//
     servicesController = require('../controllers/services.js'),
     menuPageController = require('../controllers/menuPage.js'),
@@ -33,12 +35,14 @@ router.get('/', homeController);
 router.get('/personal_area', personalAreaController);
 router.post('/check', checkController);
 router.post('/toOrder', toOrderController);
+router.get('/menuPage?', menuPageController);
+router.post('/removeOrder', removeOrderController);
+router.post('/removeSubscriber', removeSubscriberController);
 
 //Services//
 router.get('/services', servicesController);
 
 //MenuPage//
-router.get('/menuPage?', menuPageController);
 router.post('/removeFromBasket', removeFromBasketController);
 router.post('/dishCountLess', dishCountLessController);
 router.get('/basket', addOrder);

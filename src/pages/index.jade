@@ -19,7 +19,12 @@ block content
         +header()
     .main-wrapper
         .main-page
+            -var orders2 = orders.splice(0,orders.length/2);
+            .column
                 each order in orders
+                    +session(order)
+            .column
+                each order in orders2
                     +session(order)
         +footer('© M&B Corporation')
 
@@ -34,7 +39,7 @@ block content
                     img(src=user.avatar)
                     .input_message
                         input.form-control(autocomplete='off' style="color: #777;" value="Введите Ваше сообщение.." onfocus="if (this.value == 'Введите Ваше сообщение..') {this.value = ''; this.style.color = '#000';}" onblur="if (this.value == '') {this.value = 'Введите Ваше сообщение..'; this.style.color = '#777';}")
-                        +button("Send!", ['button_size-m'], {"type": "submit"})
+                        +button("Отправить!", ['button_size-m'], {"type": "submit"})
 
         if user
             each order in orders
@@ -67,14 +72,18 @@ block content
                             .orderform__dishes
                                 each zakaz in order.orders
                                     +eda(zakaz.dish.title, zakaz.count, zakaz.dish.price)
-                                each subscriber in order.subscriber
+                                each subscriber in order.subscribers
                                     each subDish in subscriber.orders
                                         .photo(data-title=subDish.title)
                                             img(src=subDish.image)
                             .orderform__input
                                 .input__button
                                     +button("Заказать", [], {"type": "submit"})
-    script.
-        var mainUser = !{JSON.stringify(user)};
-    script
-        include scripts/chat.js
+    if user
+        script.
+            var mainUser = !{JSON.stringify(user)};
+        script
+            include scripts/chat.js
+            include scripts/removeSession.js
+            include scripts/removeSubscriber.js
+
