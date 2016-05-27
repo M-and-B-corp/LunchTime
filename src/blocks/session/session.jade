@@ -63,7 +63,8 @@ mixin session(order)
 
         .session__subscriber
             .subscriber__title
-
+                -console.log(user);
+                -console.log(order.owner);
                 if user && user._id + '' == order.owner._id + ''
                     .title__title Ваш заказ
                     a(href='/menuPage?whoIsIt=fickleOwner&orderId=' + order._id + '&serviceId=' + order.service._id)
@@ -71,7 +72,6 @@ mixin session(order)
                     .subscriber__eda
                         each zakaz in order.orders
                             +eda(zakaz.dish.title, zakaz.count, zakaz.dish.price, zakaz.dish._id)
-
                 else
                     each subscriber in order.subscribers
                         if user && user._id + '' == subscriber.person._id + ''
