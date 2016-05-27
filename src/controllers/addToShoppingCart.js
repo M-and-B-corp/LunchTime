@@ -6,7 +6,7 @@ module.exports = function (req, res) {
         var emptyOrder = true;
         req.session.cart.orders = req.session.cart.orders.map(function (order) {
             if (order.dish._id == req.body.dishId) {
-                order.count = order.count + 1;
+                order.count = +order.count + 1;
                 addedOrder = order;
                 emptyOrder = false;
                 return order;

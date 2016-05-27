@@ -1,6 +1,7 @@
-mixin eda(name, count, cost)
+mixin eda(name, count, cost, id)
     .eda
+        input(type='hidden' value=id)
         .eda__name= name
         .eda__count Кол-во:
-            =count
+            =' ' + count
         .eda__cost= cost + " руб."

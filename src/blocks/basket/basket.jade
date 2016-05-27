@@ -3,14 +3,14 @@ include ../order/order
 mixin basket(orders)
     .basket
         .orders
-            each item in orders
-                +order(item.title, item.price)
+            each order in orders
+                +order(order.dish.title, order.dish.price, order.dish._id, order.count)
         .basket__allcost
             span.total_sum
         .basket__button
             p.offer-hide__title Введите время:
                 .offers-hide__blockOfLogic
-                    input.offers-hide__time-hrs(name="hrs")
+                    input.offers-hide__time-hrs(name="hours")
                     span.offers-hide__dtt :
-                    input.offers-hide__time-mnts(name="mnts")
-                    +button("Заказать", [], {"href": "/basket"})
+                    input.offers-hide__time-mnts(name="minutes")
+                    +button("Готово", [], {"href": "/basket"})

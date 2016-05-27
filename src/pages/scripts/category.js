@@ -1,9 +1,9 @@
-var category = $('.category').find('a');
+var category = $('.category').find('input');
 
 category.on('click', function () {
     jQuery.ajax({
         data: {
-            category: $(this).find('input').val()
+            category: $(this).val()
         },
         type: 'POST',
         url: '/category'
