@@ -5,8 +5,12 @@ mixin basket(orders)
         .orders
             each item in orders
                 +order(item.title, item.price)
-        hr.basket__hr
         .basket__allcost
             span.total_sum
         .basket__button
-            +button("Заказать", [], {"href": "/basket"})
+            p.offer-hide__title Введите время:
+                .offers-hide__blockOfLogic
+                    input.offers-hide__time-hrs(name="hrs")
+                    span.offers-hide__dtt :
+                    input.offers-hide__time-mnts(name="mnts")
+                    +button("Заказать", [], {"href": "/basket"})

@@ -32,12 +32,53 @@ img.header_content__avatar
 
 .info_owner__time
     font-size 0.8em
+    display inline-block
+
+.info_owner__session_time
+    display inline-block
+    margin-left 3px
 
 .control__chat
-    float left
-    //display inline-block
-    //width 100%
-    margin-left 60px
+    width 50px
+    display inline-block
+    vertical-align middle
+    position absolute
+    right 60px
+    top 10px
+    margin-right 20px
+    margin-top 5px
+    font-size 2em
+
+.control__chat img
+    width 30px
+
+.header_content__order
+    width 50px
+    display inline-block
+    vertical-align middle
+    position absolute
+    right 110px
+    top 10px
+    margin-right 20px
+    margin-top 5px
+    font-size 2em
+
+.header_content__order img
+    width 30px
+
+.header_content__add
+    width 50px
+    display inline-block
+    vertical-align middle
+    position absolute
+    right 10px
+    top 10px
+    margin-right 10px
+    margin-top 5px
+    font-size 2em
+
+.header_content__add img
+    width 30px
 
 .header_content__button
     display inline-block
@@ -51,11 +92,8 @@ img.header_content__avatar
     width 50px
 
 .main_content
-    height 170px
+    height 205px
     overflow-y auto
-
-.session__main
-    height 240px
 
 .main_content__dishes
     margin 10px
@@ -78,23 +116,41 @@ img.header_content__avatar
     margin-left 10px
     display inline-block
     vertical-align middle
-    width 80%
+    width 70%
+    font-size 1.2em
 
 .title__menu
     width 50px
+
+.title__close
+    margin-left 10px
+    width 40px
 
 .title__down
     width 30px
     margin-top 10px
 
-.subscriber__list
-    //display none
-
 .main_content__image
     width 100px
 
-.session__subscriber
-    display none
+.subscriber__title hr
+    width 90%
+    margin 0 auto
+
+.subscriber__allcost
+    //display inline-block
+    text-align center
+    margin 10px
+    margin-left 0
+
+.allcost__sum
+    margin-left 5px
+    //display inline-block
+    text-align center
+
+.full_sum
+    display inline-block
+    width 100%
 
 @media (max-width: 630px)
     .menu-item
@@ -103,3 +159,11 @@ img.header_content__avatar
 @media (max-width: 770px)
     .session
         width 90%
+
+@media (max-width: 420px)
+    .info_owner
+        display none
+
+@media (max-width: 480px)
+    .title__title
+        width 50%
