@@ -10,35 +10,47 @@ mixin session(order)
                 img.header_content__avatar(src=order.owner.avatar)
                 .info_owner
                     .info_owner__name= order.owner.name
-                    .info_owner__time= order.creatingTime
+                    .info_owner__time Сделал заказ на
+                        .info_owner__session_time 10:10
+
+                .header_content__order
+                    if user && user._id + '' == order.owner._id + ''
+                        form(action="/toOrder", method="post")
+                            img(src="../images/order.png")
+
                 .control__chat(onclick="document.getElementById('chat').style.display='block'")
-                    +button("Чат", [], {"type": "submit"})
+                    img(src="../images/chat.png")
                 if user && user._id + '' == order.owner._id + ''
                     img(src="../images/total/close.png" class="header_content__button" onclick="document.getElementById('session').style.display='none'")
+                else
+                    .header_content__add
+                        img(src="../images/add.png" href='/menuPage?isOwner=false&orderId=' + order._id + '&serviceId=' + order.service._id)
 
         .session__main
             .main_content
-                .main_content__dishes Подписчики
+                //.main_content__dishes Подписчики
                     //each subscriber in order.subscriber
                 +subscriber(order)
                 +subscriber(order)
                 +subscriber(order)
                 +subscriber(order)
-            .session__controls
-                if user
-                    .control
-                        .control__order
-                            if user && user._id + '' == order.owner._id + ''
-                                form(action="/toOrder", method="post")
-                                    +button("Заказать", [], {"type": "submit"})
-                            else
-                                +button("Присоединиться", [], {'href': '/menuPage?isOwner=false&orderId=' + order._id + '&serviceId=' + order.service._id})
+            //.session__controls
+            //    if user
+            //        .control
+            //            .control__order
+            //                +button("Присоединиться", [], {'href': '/menuPage?isOwner=false&orderId=' + order._id + '&serviceId=' + order.service._id})
 
         if user
             .session__subscriber
                 .subscriber__title
                     .title__title Моё меню
                     img(src="../images/menu.png" class="title__menu")
+                    img(src="../images/total/close.png" class="title__close")
                     .subscriber__eda
                         each zakaz in order.orders
                             +eda(zakaz.dish.title, zakaz.count, zakaz.dish.price)
+                    hr
+                    .full_sum
+                        .subscriber__allcost Общая стоимость заказа:
+                            .allcost__sum 100000 руб.
+
