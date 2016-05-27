@@ -1,16 +1,12 @@
-mixin order(title, price, sum)
+mixin order(title, price, id, count)
     .order
+        input.order__price(type='hidden' value=price)
+        input.order__id(type='hidden' value=id)
         a.order__close
             i.order__icon.order__icon_close
-        .order__info= title
-        .order__cost
-            span.order__cost_val= price
-            //span  руб. *
+        .order__info= title + ' (' + price + ' руб.)'
         a.order__less
             i.order__icon.order__icon_less
-        .order__value 1
+        .order__value= count
         a.order__more
             i.order__icon.order__icon_more
-        .order__cost_sum
-            span.order__cost_val= sum
-            span  руб.

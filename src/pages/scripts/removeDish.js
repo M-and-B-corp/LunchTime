@@ -6,7 +6,7 @@ function sendOrder() {
     var order = $(this).parent();
     $.ajax({
         data: {
-            id: order.find('.order__input').val()
+            id: order.find('.order__id').val()
         },
         method: 'post',
         url: '/removeFromBasket'

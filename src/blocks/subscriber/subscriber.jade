@@ -1,8 +1,10 @@
-mixin subscriber(order)
+mixin subscriber(subscriber)
     .subscriber
-        img.subscriber__avatar(src=order.owner.avatar)
+        img.subscriber__avatar(src=subscriber.person.avatar)
         .subscriber__person
-            .subscriber__name Алексей Бажин
-                .subscriber__paid (оплачено)
-            .subscriber__sum 100000 руб.
-
+            .subscriber__name= subscriber.person.name
+                if (subscriber.paid)
+                    .subscriber__paid (оплачено)
+                else
+                    .subscriber__paid (не оплачено)
+            .subscriber__sum= subscriber.paymentSum + ' руб.'
