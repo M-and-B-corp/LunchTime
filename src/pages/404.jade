@@ -2,5 +2,6 @@ extends layout
 block title 
     title "Page not found"
 block content
-    a(href="/") Вернуться на главную
-        img.image404(src="images/404.png")
+    .page404
+        a.to_home(href="/") Вернуться на главную
+        img.image404(src="images/404.jpg")
