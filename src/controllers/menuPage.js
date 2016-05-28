@@ -7,35 +7,37 @@ module.exports = function (req, res, next) {
         .populate('orders.dish')
         .populate('subscribers.orders.dish')
         .exec(function (err, order) {
+            console.log(req.query.serviceId);
         DishModel.find({_serviceId: req.query.serviceId, category: '/burgers'}).exec(function (err, itemDishes) {
             CategoryModel.find({}).exec(function (err, categories) {
                 if (err) return next(err);
-
+                console.log(req.query.whoIsIt);
                 //Если не существует заказа в сессии, или если мы зашли на другой сервис,
                 // то создаем новую сессию, иначе берем старую
                 if (!req.session.cart || !req.session.cart.orders || req.session.serviceId != req.query.serviceId) {
 
-                    if (req.query.whoIsIt == 'owner') {
+                    if (req.query.whoIsIt + '' == 'owner') {
                         req.session.cart = {
                             orders: [],
                             serviceId: req.query.serviceId,
                             whoIsIt: 'owner'
                         };
-                    } else if (req.query.whoIsIt == 'fickleOwner') {
+                    } else if (req.query.whoIsIt + '' == 'fickleOwner') {
+                        console.log('fickleOwner');
                         req.session.cart = {
                             orders: order.orders,
                             orderId: req.query.orderId,
                             whoIsIt: 'fickleOwner'
                         };
                     }
-                    else if (req.query.whoIsIt == 'subscriber') {
+                    else if (req.query.whoIsIt + '' == 'subscriber') {
                         req.session.cart = {
                             orders: [],
                             orderId: req.query.orderId,
                             whoIsIt: 'subscriber'
                         };
                     }
-                    else if (req.query.whoIsIt == 'fickleSubscriber') {
+                    else if (req.query.whoIsIt + '' == 'fickleSubscriber') {
                         var orders = [];
                         order.subscribers.forEach(function (subscriber) {
                             if (subscriber.person._id + '' == req.user._id + '')
