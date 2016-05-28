@@ -31,9 +31,11 @@ block content
                         span.main-wrapper__title_sum Общая стоимость: 0 руб.
                         span.main-wrapper__title_count Кол-во: 0
                 #box.main-wrapper__basket(style="display: none;")
-                    +basket(orders)
+
+                    +basket(orders, whoCame)
 
         +footer('© M&B Corporation')
+
         script
             include scripts/category.js
             include scripts/addDish.js
