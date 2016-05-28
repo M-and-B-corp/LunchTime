@@ -49,7 +49,7 @@ mixin session(order)
             .main_content
                 .main_content__dishes Подписчики
                     each subscriber in order.subscribers
-                        +subscriber(subscriber)
+                        +subscriber(subscriber, order)
 
         if user
             if user._id + '' == order.owner._id + ''
