@@ -4,8 +4,12 @@ var Schema = mongoose.Schema;
 
 var personSchema = new Schema({
     name:  {type: String, require: true},
-    avatar: String,
     phone: String,
+    street: String,
+    home: String,
+    building: String,
+    apartment: String,
+    avatar: String,
     facebookId: String,
     vkId: String
 });
