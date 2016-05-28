@@ -8,9 +8,9 @@ mixin basket(orders)
         .basket__allcost
             span.total_sum
         .basket__button
-            p.offer-hide__title Введите время:
+            p.offer-hide__title Введите дату и время:
                 .offers-hide__blockOfLogic
-                    input.offers-hide__time-hrs(name="hours")
-                    span.offers-hide__dtt :
-                    input.offers-hide__time-mnts(name="minutes")
+                    input.offers-hide__time-hrs(name="hours" type="date")
+                    span.offers-hide__dtt
+                    input.offers-hide__time-mnts(name="minutes" type="time")
                     +button("Готово", [], {"href": "/basket"})
