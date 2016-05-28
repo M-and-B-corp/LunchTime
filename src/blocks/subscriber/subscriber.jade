@@ -12,7 +12,6 @@ mixin subscriber(subscriber, order)
                 .subscriber__sum= subscriber.paymentSum + ' руб.'
     else
         .subscriber
-            if user._id + '' == order.owner._id + ''
             img.subscriber__avatar(src=subscriber.person.avatar)
             .subscriber__person
                 .subscriber__name= subscriber.person.name
@@ -21,6 +20,7 @@ mixin subscriber(subscriber, order)
                     else
                         .subscriber__paid (не оплачено)
                 .subscriber__sum= subscriber.paymentSum + ' руб.'
-            .subscriber__input
-                input.subscriber__input_paid(type="checkbox" id="checkbox")
-                label(for="checkbox")
+            if user && user._id + '' == order.owner._id + ''
+                .subscriber__input
+                    input.subscriber__input_paid(type="checkbox" id="checkbox")
+                    label(for="checkbox")
