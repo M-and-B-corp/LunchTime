@@ -8,13 +8,11 @@ mixin basket(orders, whoCame)
         .basket__allcost
             span.total_sum
         .basket__button
-
-            .offer-hide__title Введите время заказа:
-                if whoCame == 'owner'
+            if whoCame == 'owner'
+                .offer-hide__title Введите время заказа:
                     form.offers-hide__blockOfLogic(action='/preAddOrder' method='POST')
                         input(type="datetime-local" name='time')
                         +button("Готово", [], {"type": "submit"})
-                else
-                    .offers-hide__blockOfLogic
-                        input(type="datetime-local")
-                        +button("Готово", [], {"href": "/basket"})
+            else
+                .offers-hide__blockOfLogic
+                    +button("Готово", [], {"href": "/basket"})
