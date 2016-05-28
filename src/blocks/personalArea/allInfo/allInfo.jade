@@ -5,7 +5,7 @@ mixin allInfo(user)
         .allInfo__content
             .info-content
                 .info-content__phone
-                    .phone
+                    .field
                         .phone__title Телефон
                         input(type="text" name='phone' class="phone__number" autocomplete='off' style="color: #777;" value=user.phone || 'Телефон' onfocus="if (this.value == 'Телефон') {this.value = ''; this.style.color = '#000';}" onblur="if (this.value == '') {this.value = 'Телефон'; this.style.color = '#777';}")
                     hr.info__hr
