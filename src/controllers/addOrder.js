@@ -30,7 +30,7 @@ module.exports = function (req, res, next) {
             orders: req.session.cart.orders,
             paymentSum: totalSum,
             service: service,
-            orderTime: moment(req.session.cart.orderTime).calendar(true).toLowerCase(),
+            orderTime: moment(req.session.cart.orderTime).calendar().toLowerCase(),
             subscriber: []
         });
 
