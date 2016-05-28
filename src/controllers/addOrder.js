@@ -1,6 +1,7 @@
 var OrderModel = require('../models/order').model;
 var ServiceModel = require('../models/service').model;
 var moment = require('moment');
+    moment.locale('ru');
 
 module.exports = function (req, res, next) {
     if (req.session.cart.whoIsIt == 'owner') {
@@ -22,13 +23,14 @@ module.exports = function (req, res, next) {
         var totalSum = req.session.cart.orders.reduce(function (sum, order) {
             return sum + +order.dish.price * +order.count;
         }, 0);
-
+        
+        console.log('time: ',req.query.orderTime);
         var orderModel = new OrderModel({
             owner: req.user,
             orders: req.session.cart.orders,
             paymentSum: totalSum,
             service: service,
-            creatingTime: moment().format('HH:mm'),
+            orderTime: moment(req.session.cart.orderTime).calendar(true).toLowerCase(),
             subscriber: []
         });
 

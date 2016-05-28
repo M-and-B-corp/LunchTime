@@ -10,7 +10,6 @@ function sendInfo() {
         sendData[$(this).attr('name')] = $(this).val();
     });
     
-    console.log(sendData);
     jQuery.ajax({
         data: sendData,
         type: 'POST',
