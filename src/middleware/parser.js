@@ -33,7 +33,7 @@ function findAndSaveDishes(category) {
                         image: $(this).find('img').attr('src'),
                         description: $(this).find('.views-field-field-text div').text(),
                         uselfulness: $(this).find('.views-field-field-text2 div').text(),
-                        _serviceId: new mongoose.Types.ObjectId("573a19b997402de41834d1b8")
+                        _serviceId: new mongoose.Types.ObjectId("573a19dad7113a722fbbc0e1")
                         //TODO: Поставить id в зависимости от сервиса
                     });
                 }
