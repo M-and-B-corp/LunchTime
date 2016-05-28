@@ -11,6 +11,7 @@ var orderSchema = new Schema({
     paymentSum: String,
     service: serviceSchema,
     creatingTime: String,
+    orderTime: String,
     subscribers: [{
         person: personSchema, 
         orders: [{count: String, dish: {type: Schema.Types.ObjectId, ref: 'Dish'}}], 

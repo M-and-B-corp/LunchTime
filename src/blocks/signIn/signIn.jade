@@ -1,0 +1,23 @@
+include ../button/button
+
+mixin signIn()
+    #signIn.signIn
+        .signIn__content
+            .signIn__title
+                span.title__user_name Авторизация
+                .signIn__close
+                    img(src="../images/total/close.png" onclick="document.getElementById('signIn').style.display='none'")
+            .signIn__history
+                .signIn__name Ваше имя
+                .history__input
+                    input(type="text" class="signIn__input" autocomplete='off' style="color: #777;" value="Введите имя" onfocus="if (this.value == 'Введите имя') {this.value = ''; this.style.color = '#000';}" onblur="if (this.value == '') {this.value = 'Введите имя'; this.style.color = '#777';}")
+                .signIn__surname Ваша фамилия
+                .history__input
+                    input(type="text" class="signIn__input" autocomplete='off' style="color: #777;" value="Введите фамилию" onfocus="if (this.value == 'Введите фамилию') {this.value = ''; this.style.color = '#000';}" onblur="if (this.value == '') {this.value = 'Введите фамилию'; this.style.color = '#777';}")
+                .signIn__button
+                    +button("Войти", ['button_size-m'], {"type": "submit"})
+                .signIn__or или
+                .signIn__login войдите через
+                    .login__sites
+                        a.auth__social.auth__social_vk(href="/auth/vk")
+                        a.auth__social.auth__social_fb(href="/auth/fb")

@@ -6,7 +6,7 @@ var express = require('express'),
     homeController = require('../controllers/home.js'),
     personalAreaController = require('../controllers/personalArea.js'),
     toOrderController = require('../controllers/toOrder.js'),
-    checkController = require('../middleware/check.js'),
+    changePaidController = require('../middleware/changePaidSubscriber.js'),
     removeOrderController = require('../controllers/removeOrder.js'),
     removeSubscriberController = require('../controllers/removeSubscriber.js'),
     
@@ -19,6 +19,7 @@ var express = require('express'),
 
     //MenuPage//
     addToShoppingCart = require('../controllers/addToShoppingCart'),
+    preAddOrder = require('../controllers/preAddOrder'),
     addOrder = require('../controllers/addOrder'),
     removeFromBasketController = require('../controllers/removeFromBasket.js'),
     dishCountLessController = require('../controllers/dishCountLess'),
@@ -36,7 +37,7 @@ router.get('/logout', function (req, res) {
 //Index//
 router.get('/', homeController);
 router.get('/personal_area', personalAreaController);
-router.post('/check', checkController);
+router.post('/changePaid', changePaidController);
 router.post('/toOrder', toOrderController);
 router.get('/menuPage?', menuPageController);
 router.post('/removeOrder', removeOrderController);
@@ -52,6 +53,7 @@ router.get('/services', servicesController);
 router.post('/removeFromBasket', removeFromBasketController);
 router.post('/dishCountLess', dishCountLessController);
 router.get('/basket', addOrder);
+router.post('/preAddOrder', preAddOrder);
 router.post('/orders', addToShoppingCart);
 router.post('/category', categoryController);
 

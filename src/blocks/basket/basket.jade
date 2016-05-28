@@ -1,6 +1,6 @@
 include ../order/order
 
-mixin basket(orders)
+mixin basket(orders, whoCame)
     .basket
         .orders
             each order in orders
@@ -8,9 +8,13 @@ mixin basket(orders)
         .basket__allcost
             span.total_sum
         .basket__button
-            .offer-hide__title Введите дату и время:
-                .offers-hide__blockOfLogic
-                    input.offers-hide__time-hrs(name="hours" type="date")
-                    span.offers-hide__dtt
-                    input.offers-hide__time-mnts(name="minutes" type="time")
-                    +button("Готово", [], {"href": "/basket"})
+
+            .offer-hide__title Введите время заказа:
+                if whoCame == 'owner'
+                    form.offers-hide__blockOfLogic(action='/preAddOrder' method='POST')
+                        input(type="datetime-local" name='time')
+                        +button("Готово", [], {"type": "submit"})
+                else
+                    .offers-hide__blockOfLogic
+                        input(type="datetime-local")
+                        +button("Готово", [], {"href": "/basket"})
