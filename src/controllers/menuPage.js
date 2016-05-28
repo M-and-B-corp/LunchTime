@@ -13,7 +13,6 @@ module.exports = function (req, res, next) {
 
                 //Если не существует заказа в сессии, или если мы зашли на другой сервис,
                 // то создаем новую сессию, иначе берем старую
-                console.log(req.session.cart);
                 if (!req.session.cart || !req.session.cart.orders || req.session.serviceId != req.query.serviceId) {
 
                     if (req.query.whoIsIt == 'owner') {
@@ -49,11 +48,11 @@ module.exports = function (req, res, next) {
                         };
                     }
                 }
-
                 res.render('menuPage', {
                     dishes: itemDishes,
                     categories: categories,
-                    orders: req.session.cart.orders
+                    orders: req.session.cart.orders,
+                    whoCame: req.session.cart.whoIsIt
                 });
             })
         });

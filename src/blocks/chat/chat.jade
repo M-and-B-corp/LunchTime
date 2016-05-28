@@ -1,0 +1,16 @@
+include ../button/button
+
+mixin chat()
+    if user
+        #chat.chat
+            .chat__content
+                .chat__title
+                    span.title__user_name= user.name
+                    .chat__close
+                        img(src="../images/total/close.png" onclick="document.getElementById('chat').style.display='none'")
+                .chat__history
+                form.chat__input
+                    img(src=user.avatar)
+                    .input_message
+                        input.form-control(autocomplete='off' style="color: #777;" value="Введите Ваше сообщение.." onfocus="if (this.value == 'Введите Ваше сообщение..') {this.value = ''; this.style.color = '#000';}" onblur="if (this.value == '') {this.value = 'Введите Ваше сообщение..'; this.style.color = '#777';}")
+                        +button("Отправить", ['button_size-m'], {"type": "submit"})

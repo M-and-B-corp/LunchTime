@@ -13,15 +13,16 @@ mixin session(order)
                         img.header_content__avatar(src=order.owner.avatar)
                         .info_owner
                             .info_owner__name= order.owner.name
-                            .info_owner__time Сделал заказ на
-                                .info_owner__session_time 10:10
+
+                            .info_owner__time Заказ будет доставлен
+                                = ' ' + order.orderTime
                         .header_content__order
                             a(href='' onclick="document.getElementById('orderform').style.display='block'; return false;")
                                 img(src="../images/order.png")
                         a.control__chat(href='' onclick="document.getElementById('chat').style.display='block'; return false;")
                             img(src="../images/chat.png")
                         a.header_content__close(href='')
-                                img.header_content__button(src='../images/total/close.png')
+                            img.header_content__button(src='../images/total/close.png')
 
             else
                 .session__header
@@ -30,7 +31,7 @@ mixin session(order)
                         .info_owner
                             .info_owner__name= order.owner.name
                             .info_owner__time Сделал заказ на
-                                .info_owner__session_time 10:10
+                                .info_owner__session_time= order.orderTime
                         a.control__chat(href='' onclick="document.getElementById('chat').style.display='block'; return false;")
                             img(src="../images/chat.png")
                         .header_content__add
@@ -43,7 +44,7 @@ mixin session(order)
                     .info_owner
                         .info_owner__name= order.owner.name
                         .info_owner__time Сделал заказ на
-                            .info_owner__session_time 10:10
+                            .info_owner__session_time= order.orderTime
 
         .session__main
             .main_content
