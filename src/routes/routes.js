@@ -13,7 +13,10 @@ var express = require('express'),
     //Services//
     servicesController = require('../controllers/services.js'),
     menuPageController = require('../controllers/menuPage.js'),
-    
+
+    //PersonalArea//
+    setInfoController = require('../controllers/setInfo.js'),
+
     //MenuPage//
     addToShoppingCart = require('../controllers/addToShoppingCart'),
     addOrder = require('../controllers/addOrder'),
@@ -38,6 +41,9 @@ router.post('/toOrder', toOrderController);
 router.get('/menuPage?', menuPageController);
 router.post('/removeOrder', removeOrderController);
 router.post('/removeSubscriber', removeSubscriberController);
+
+//Personal_area
+router.post('/setInfo', setInfoController);
 
 //Services//
 router.get('/services', servicesController);
