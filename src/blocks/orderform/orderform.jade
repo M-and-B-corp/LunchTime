@@ -12,31 +12,27 @@ mixin orderform(orders)
                             .info-content__phone
                                 .field
                                     .phone__title Имя
-                                    input(type="text" class="phone__number" autocomplete='off' style="color: #777;" value="Имя" onfocus="if (this.value == 'Имя') {this.value = ''; this.style.color = '#000';}" onblur="if (this.value == '') {this.value = 'Имя'; this.style.color = '#777';}")
-                                hr.info__hr
-                                .field
-                                    .phone__title Фамилия
-                                    input(type="text" class="phone__number" autocomplete='off' style="color: #777;" value="Фамилия" onfocus="if (this.value == 'Фамилия') {this.value = ''; this.style.color = '#000';}" onblur="if (this.value == '') {this.value = 'Фамилия'; this.style.color = '#777';}")
+                                    input(type="text" class="phone__number" autocomplete='off' style="color: #777;" value=order.owner.name || 'Имя' onfocus="if (this.value == 'Имя') {this.value = ''; this.style.color = '#000';}" onblur="if (this.value == '') {this.value = 'Имя'; this.style.color = '#777';}")
                                 hr.info__hr
                                 .field
                                     .phone__title Телефон
-                                    input(type="text" class="phone__number" autocomplete='off' style="color: #777;" value="Телефон" onfocus="if (this.value == 'Телефон') {this.value = ''; this.style.color = '#000';}" onblur="if (this.value == '') {this.value = 'Телефон'; this.style.color = '#777';}")
+                                    input(type="text" class="phone__number" autocomplete='off' style="color: #777;" value=user.phone || 'Телефон' onfocus="if (this.value == 'Телефон') {this.value = ''; this.style.color = '#000';}" onblur="if (this.value == '') {this.value = 'Телефон'; this.style.color = '#777';}")
                                 hr.info__hr
                                 .field
                                     .adress__title Улица
-                                    input(type="text" class="adress__adress" autocomplete='off' style="color: #777;" value="Улица" onfocus="if (this.value == 'Улица') {this.value = ''; this.style.color = '#000';}" onblur="if (this.value == '') {this.value = 'Улица'; this.style.color = '#777';}")
+                                    input(type="text" class="adress__adress" autocomplete='off' style="color: #777;" value=user.street || 'Улица' onfocus="if (this.value == 'Улица') {this.value = ''; this.style.color = '#000';}" onblur="if (this.value == '') {this.value = 'Улица'; this.style.color = '#777';}")
                                 hr.info__hr
                                 .field
                                     .adress__title Дом
-                                    input(type="text" class="adress__adress" autocomplete='off' style="color: #777;" value="Дом" onfocus="if (this.value == 'Дом') {this.value = ''; this.style.color = '#000';}" onblur="if (this.value == '') {this.value = 'Дом'; this.style.color = '#777';}")
+                                    input(type="text" class="adress__adress" autocomplete='off' style="color: #777;" value=user.home || 'Дом' onfocus="if (this.value == 'Дом') {this.value = ''; this.style.color = '#000';}" onblur="if (this.value == '') {this.value = 'Дом'; this.style.color = '#777';}")
                                 hr.info__hr
                                 .field
                                     .adress__title Корпус
-                                    input(type="text" class="adress__adress" autocomplete='off' style="color: #777;" value="Корпус" onfocus="if (this.value == 'Корпус') {this.value = ''; this.style.color = '#000';}" onblur="if (this.value == '') {this.value = 'Корпус'; this.style.color = '#777';}")
+                                    input(type="text" class="adress__adress" autocomplete='off' style="color: #777;" value=user.building || 'Корпус' onfocus="if (this.value == 'Корпус') {this.value = ''; this.style.color = '#000';}" onblur="if (this.value == '') {this.value = 'Корпус'; this.style.color = '#777';}")
                                 hr.info__hr
                                 .field
                                     .adress__title Квартира
-                                    input(type="text" class="adress__adress" autocomplete='off' style="color: #777;" value="Квартира" onfocus="if (this.value == 'Квартира') {this.value = ''; this.style.color = '#000';}" onblur="if (this.value == '') {this.value = 'Квартира'; this.style.color = '#777';}")
+                                    input(type="text" class="adress__adress" autocomplete='off' style="color: #777;" value= user.apartment || 'Квартира' onfocus="if (this.value == 'Квартира') {this.value = ''; this.style.color = '#000';}" onblur="if (this.value == '') {this.value = 'Квартира'; this.style.color = '#777';}")
                                 hr.info__hr
                         .orderform__dishes
                             each zakaz in order.orders
