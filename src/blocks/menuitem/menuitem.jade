@@ -1,10 +1,8 @@
-include ../button/button
-
 mixin menuitem(dish)
     .menu-item
+        a.menu-item__link(href="/orders?dishId=" + dish._id)
         img.menu-item__image(src= dish.image)
         .menu-item__info
             .menu-item__title= dish.title
             .menu-item__other-info
                 .menu_item__price= dish.price + ' руб'
-                +button("В заказ!", ["button_size-m"], {"type": "submit"})
