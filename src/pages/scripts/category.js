@@ -8,37 +8,29 @@ category.on('click', function () {
         type: 'POST',
         url: '/category'
     }).done(function (dishes) {
-        var form = $('.main-wrapper__menuitem');
-        form.off('submit', sendForm);
-        form.remove();
+        var item = $('.menu-item');
+        item.off('click', sendForm);
+        item.remove();
 
         dishes.forEach(function (dish) {
             addItem(dish);
         });
 
-        form = $('.main-wrapper__menuitem');
-        form.on('submit', sendForm);
+        item = $('.menu-item__link');
+        item.on('click', sendForm);
     });
 });
 
 function addItem(dish) {
-    var form = $("<form/>", {
-        name: "dishForm",
-        action: '/orders',
-        method: 'post',
-        'class': 'main-wrapper__menuitem'
-    }).appendTo($('.main-wrapper__menu'));
-
-    $("<input/>", {
-        type: 'hidden',
-        name: 'dishId',
-        value: dish._id
-    }).appendTo(form);
-
     var menuItem = $("<div/>", {
         'class': 'menu-item'
-    }).appendTo(form);
+    }).appendTo($('.main-wrapper__menu'));
 
+    $("<a/>", {
+        href: "/orders?dishId=" + dish._id,
+        'class': 'menu-item__link'
+    }).appendTo(menuItem);
+    
     $("<img/>", {
         src: dish.image,
         'class': 'menu-item__image'
@@ -62,16 +54,4 @@ function addItem(dish) {
         text: dish.price + ' руб'
     }).appendTo(menuItemOtherInfo);
 
-    var button = $("<div/>", {
-        'class': 'button button_size-m'
-    }).appendTo(menuItemOtherInfo);
-
-    var buttonButton = $("<button/>", {
-        'class': 'button__button button_size-m'
-    }).appendTo(button);
-
-    $("<span/>", {
-        'class': 'button__title',
-        text: 'В заказ'
-    }).appendTo(buttonButton);
 }

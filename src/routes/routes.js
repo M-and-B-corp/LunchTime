@@ -39,7 +39,7 @@ router.get('/', homeController);
 router.get('/personal_area', personalAreaController);
 router.post('/changePaid', changePaidController);
 router.post('/toOrder', toOrderController);
-router.get('/menuPage?', menuPageController);
+router.get('/menuPage', menuPageController);
 router.post('/removeOrder', removeOrderController);
 router.post('/removeSubscriber', removeSubscriberController);
 
@@ -54,7 +54,7 @@ router.post('/removeFromBasket', removeFromBasketController);
 router.post('/dishCountLess', dishCountLessController);
 router.get('/basket', addOrder);
 router.post('/preAddOrder', preAddOrder);
-router.post('/orders', addToShoppingCart);
+router.get('/orders', addToShoppingCart);
 router.post('/category', categoryController);
 
 exports.router = router;
