@@ -7,7 +7,7 @@ function sendIconMore() {
         data: {
             dishId: dishId
         },
-        method: 'post',
+        method: 'get',
         url: '/orders'
     }).done(function (dish) {
         $('.order').each(function () {
