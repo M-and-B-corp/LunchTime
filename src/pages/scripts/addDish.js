@@ -1,12 +1,10 @@
-var form = $('.main-wrapper__menuitem');
-form.on('submit', sendForm);
+var link = $('.menu-item__link');
+link.on('click', sendForm);
 
 function sendForm() {
-    var sendData = $(this).serialize();
-    jQuery.ajax({
-        data: sendData,
-        type: $(this).attr('method'),
-        url: $(this).attr('action')
+    $.ajax({
+        type: 'get',
+        url: $(this).attr('href')
     }).done(function (dish) {
         var dishInOrders = false;
         $('.order').each(function () {
@@ -15,7 +13,7 @@ function sendForm() {
                 dishInOrders = true;
             }
         });
-        
+
         if (!dishInOrders) addOrder(dish.title, dish.price, dish._id);
 
         var close = $('.order').find('.order__close');
@@ -23,6 +21,7 @@ function sendForm() {
         close.on('click', sendOrder);
 
         var more = $('.order__more');
+               
         more.off('click', sendIconMore);
         more.on('click', sendIconMore);
 
@@ -51,7 +50,7 @@ function addOrder(title, sum, id) {
         type: 'hidden',
         value: id
     }).appendTo(order);
-    
+
     var order__close = $("<a/>", {
         "class": "order__close"
     }).appendTo(order);

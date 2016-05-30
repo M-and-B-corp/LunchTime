@@ -21,9 +21,7 @@ block content
             .main-wrapper__menu
                 span.main-wrapper__title Что вы хотите съесть сегодня?
                 each dish in dishes
-                    form(name='dishForm' action="/orders", method="post").main-wrapper__menuitem
-                        input(type="hidden", name="dishId" value=dish._id)
-                        +menuitem(dish)
+                    +menuitem(dish)
             .main-wrapper__cart
                 span.main-wrapper__title_cart Корзина
                     img(src="../images/down.png")
