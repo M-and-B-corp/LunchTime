@@ -31,7 +31,8 @@ module.exports = function (req, res, next) {
             paymentSum: totalSum,
             service: service,
             orderTime: moment(req.session.cart.orderTime).calendar().toLowerCase(),
-            subscriber: []
+            subscriber: [],
+            messages: []
         });
 
         orderModel.save(function () {

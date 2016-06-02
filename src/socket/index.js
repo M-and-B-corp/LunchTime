@@ -4,6 +4,7 @@ var cookie = require('cookie');
 var sessionStore = require('../lib/sessionStore');
 var User = require('../models/person').model;
 var moment = require('moment');
+var OrderModel = require('../models/order').model;
 
 function loadSession(sid, callback) {
     // sessionStore callback is not quite async-style!
@@ -101,14 +102,36 @@ module.exports = function (server) {
     io.sockets.on('connection', function (socket) {
         var username = socket.handshake.user.get('name');
         var avatar = socket.handshake.user.get('avatar');
-        socket.broadcast.emit('join', username);
 
-        socket.on('message', function (text, cb) {
+        socket.on('join', function (room, callback) {
+            socket.join(room);
+            OrderModel.findOne({_id: room}, function (err, order) {
+                callback && callback(order.messages);
+            });
+        });
+        
+        socket.on('message', function (data, cb) {
             var time = moment().format('HH:mm');
-            socket.broadcast.emit('message', username, text, avatar, time);
-            cb && cb();
+
+            OrderModel.findOne({_id: data.room}, function (err, session) {
+                session.messages.push({
+                    author: socket.handshake.user,
+                    text: data.text,
+                    time: moment()
+                });
+
+                session.save(function () {
+                    socket.to(data.room).emit('message', username, data.text, avatar, time);
+                    cb && cb();
+                });
+            });
         });
 
+
+        socket.on('leave', function (room) {
+            socket.leave(room);
+        });
+        
         socket.on('disconnect', function () {
             socket.broadcast.emit('leave', username);
         });
