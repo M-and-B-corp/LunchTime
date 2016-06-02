@@ -1,9 +1,34 @@
 var input = $('.chat__input input');
 var ul = $('.chat__history');
 var form = $('.chat__input');
+var chatButton = $('.control__chat');
+var closeButton = $('.chat__close');
+var room;
 
 var socket = io.connect('', {
     reconnect: false
+});
+
+chatButton.on('click', function () {
+    room = $(this).parent().parent().parent().find('.session_id').val();
+    socket.emit('join', room, function (messages) {
+        moment.locale('ru');
+        messages.forEach(function (message) {
+            if (moment(message.time).dayOfYear() > moment().dayOfYear() - 1) {
+                printMessage(message.author.name, message.text,
+                    message.author.avatar, moment(message.time).format('h:mm'));
+            } else {
+                printMessage(message.author.name, message.text,
+                    message.author.avatar, moment(message.time).format('DD.MM.YY'));
+            }
+        })
+    });
+});
+
+closeButton.on('click', function () {
+    room = $(this).parent().parent().parent().find('.session_id').val();
+    $('.message').remove();
+    socket.emit('leave',room);
 });
 
 socket
@@ -20,7 +45,7 @@ socket
         printStatus("соединение потеряно");
         form.off('submit', sendMessage);
         input.prop('disabled', true);
-        this.$emit('error');
+        this.emit('error');
     })
     .on('logout', function () {
         location.href = "/";
@@ -35,19 +60,26 @@ socket
         }
     });
 function sendMessage() {
-    var text = input.val();
     var time = moment().format('HH:mm');
-    socket.emit('message', text, function () {
-        printMessage(mainUser.name, text, mainUser.avatar, time);
+    var data = {
+        text: input.val(),
+        room: room
+    };
+
+    socket.emit('message', data, function () {
+        printMessage(mainUser.name, data.text, mainUser.avatar, time);
 
         $('.chat__history').scrollTop($('.chat__history')[0].scrollHeight);
     });
+
     input.val('');
+
     return false;
 }
 function printStatus(status) {
     $('<li>').append($('<i>').text(status)).appendTo(ul);
 }
+
 function printMessage(userName, text, avatar, time) {
     var message = $("<div/>", {
         "class": "message"

@@ -17,6 +17,11 @@ var orderSchema = new Schema({
         orders: [{count: String, dish: {type: Schema.Types.ObjectId, ref: 'Dish'}}], 
         paymentSum: String,
         paid: Boolean
+    }],
+    messages: [{
+        author: personSchema,
+        text: String,
+        time: String
     }]
 });
 
