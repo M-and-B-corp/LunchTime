@@ -24,7 +24,6 @@ module.exports = function (req, res, next) {
             return sum + +order.dish.price * +order.count;
         }, 0);
         
-        console.log('time: ',req.query.orderTime);
         var orderModel = new OrderModel({
             owner: req.user,
             orders: req.session.cart.orders,
