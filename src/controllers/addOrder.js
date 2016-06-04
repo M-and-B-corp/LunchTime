@@ -1,7 +1,6 @@
 var OrderModel = require('../models/order').model;
 var ServiceModel = require('../models/service').model;
 var moment = require('moment');
-    moment.locale('ru');
 
 module.exports = function (req, res, next) {
     if (req.session.cart.whoIsIt == 'owner') {
