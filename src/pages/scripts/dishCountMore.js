@@ -3,7 +3,7 @@ var sendIconMore = (function () {
     iconMore.on('click', sendIconMore);
 
     function sendIconMore() {
-        var dishId = $(this).parent().find('.order__id').val();
+        var dishId = $(this).closest('.order').find('.order__id').val();
         jQuery.ajax({
             data: {
                 dishId: dishId

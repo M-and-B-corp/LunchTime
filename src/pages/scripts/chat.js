@@ -13,7 +13,6 @@
     chatButton.on('click', function () {
         room = $(this).closest('.session').find('.session_id').val();
         socket.emit('join', room, function (messages) {
-            moment.locale('ru');
             messages.forEach(function (message) {
                 if (moment(message.time).dayOfYear() > moment().dayOfYear() - 1) {
                     printMessage(message.author.name, message.text,

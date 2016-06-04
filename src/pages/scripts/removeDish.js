@@ -4,7 +4,7 @@ var sendOrder = (function () {
     close.on('click', sendOrder);
 
    function sendOrder() {
-        var order = $(this).parent();
+        var order = $(this).closest('.order');
         $.ajax({
             data: {
                 id: order.find('.order__id').val()
