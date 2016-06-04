@@ -1,4 +1,4 @@
-(function () {  // анонимная функция (function(){ })(), чтобы переменные "a" и "b" не стали глобальными
+;(function () {  // анонимная функция (function(){ })(), чтобы переменные "a" и "b" не стали глобальными
     var a = document.querySelector('#category'), b = null;  // селектор блока, который нужно закрепить
     window.addEventListener('scroll', Ascroll, false);
     document.body.addEventListener('scroll', Ascroll, false);  // если у html и body высота равна 100%
@@ -30,4 +30,4 @@
             a.children[0].style.width = getComputedStyle(a, '').width
         }, false);  // если изменить размер окна браузера, измениться ширина элемента
     }
-})()
+})();

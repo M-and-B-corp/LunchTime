@@ -1,4 +1,5 @@
-$('.allInfo__change').on('click', function () {
-    $('.info-content__phone').find('input').attr('disabled',true);
-});
-
+(function () {
+    $('.allInfo__change').on('click', function () {
+        $('.info-content__phone').find('input').attr('disabled', true);
+    });
+})();
