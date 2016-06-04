@@ -3,9 +3,9 @@
     subscriberRemove.on('click', removeSubscriber);
 
     function removeSubscriber() {
-        var subscriber = $(this).parent().parent();
+        var subscriber = $(this).closest('.subscriber');
         var subscriberId = subscriber.find('.subscriber_id').val();
-        var orderId = subscriber.parent().find('.session_id').val();
+        var orderId = subscriber.closest('.session').find('.session_id').val();
 
         $.ajax({
             data: {
@@ -16,7 +16,7 @@
             url: '/removeSubscriber'
         }).done(function () {
 
-            var subscribers = subscriber.parent().find('.session__main .subscriber');
+                var subscribers = subscriber.closest('.session').find('.session__main .subscriber');
 
             subscribers.each(function () {
                 if (subscriberId + '' == $(this).find('.subscriber_id').val() + '') $(this).remove();
