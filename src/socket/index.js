@@ -5,6 +5,7 @@ var sessionStore = require('../lib/sessionStore');
 var User = require('../models/person').model;
 var moment = require('moment');
 var OrderModel = require('../models/order').model;
+var MessageModel = require('../models/message').model;
 
 function loadSession(sid, callback) {
     // sessionStore callback is not quite async-style!
@@ -105,25 +106,27 @@ module.exports = function (server) {
 
         socket.on('join', function (room, callback) {
             socket.join(room);
-            OrderModel.findOne({_id: room}, function (err, order) {
-                callback && callback(order.messages);
+
+            MessageModel.find({room: room}, function (err, models) {
+                callback && callback(models);
             });
         });
-        
+
         socket.on('message', function (data, cb) {
             var time = moment().format('HH:mm');
+            
+            var messageModel = new MessageModel({
+                author: socket.handshake.user,
+                text: data.text,
+                time: moment(),
+                room: data.room
+            });
 
-            OrderModel.findOne({_id: data.room}, function (err, session) {
-                session.messages.push({
-                    author: socket.handshake.user,
-                    text: data.text,
-                    time: moment()
-                });
-
-                session.save(function () {
-                    socket.to(data.room).emit('message', username, data.text, avatar, time);
-                    cb && cb();
-                });
+            console.log(messageModel);
+            
+            messageModel.save(function () {
+                socket.to(data.room).emit('message', username, data.text, avatar, time);
+                cb && cb();
             });
         });
 
@@ -131,7 +134,7 @@ module.exports = function (server) {
         socket.on('leave', function (room) {
             socket.leave(room);
         });
-        
+
         socket.on('disconnect', function () {
             socket.broadcast.emit('leave', username);
         });
