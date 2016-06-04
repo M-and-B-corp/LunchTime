@@ -11,7 +11,7 @@
     });
 
     chatButton.on('click', function () {
-        room = $(this).parent().parent().parent().find('.session_id').val();
+        room = $(this).closest('.session').find('.session_id').val();
         socket.emit('join', room, function (messages) {
             moment.locale('ru');
             messages.forEach(function (message) {
@@ -27,7 +27,7 @@
     });
 
     closeButton.on('click', function () {
-        room = $(this).parent().parent().parent().find('.session_id').val();
+        room = $(this).closest('.session').find('.session_id').val();
         $('.message').remove();
         socket.emit('leave', room);
     });

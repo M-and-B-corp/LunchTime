@@ -3,8 +3,8 @@ var sendIconLess = (function () {
     iconLess.on('click', sendIconLess);
 
     function sendIconLess() {
-        var dishId = $(this).parent().find('.order__id').val();
-        var order = $(this).parent();
+        var dishId = $(this).closest('.order').find('.order__id').val();
+        var order = $(this).closest('.order');
 
         jQuery.ajax({
             data: {

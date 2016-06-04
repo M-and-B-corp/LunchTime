@@ -4,7 +4,7 @@
     close.on('click', removeOrder);
 
     function removeOrder() {
-        var order = $(this).parent().parent().parent();
+        var order = $(this).closest('.session');
 
         $.ajax({
             data: {
