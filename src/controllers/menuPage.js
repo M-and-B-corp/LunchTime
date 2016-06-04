@@ -14,7 +14,7 @@ module.exports = function (req, res, next) {
                 console.log(req.query.whoIsIt);
                 //Если не существует заказа в сессии, или если мы зашли на другой сервис,
                 // то создаем новую сессию, иначе берем старую
-                if (!req.session.cart || !req.session.cart.orders || req.session.serviceId != req.query.serviceId) {
+                if (!req.session.cart) {
 
                     if (req.query.whoIsIt + '' == 'owner') {
                         req.session.cart = {
