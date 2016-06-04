@@ -7,11 +7,9 @@ module.exports = function (req, res, next) {
         .populate('orders.dish')
         .populate('subscribers.orders.dish')
         .exec(function (err, order) {
-            console.log(req.query.serviceId);
         DishModel.find({_serviceId: req.query.serviceId, category: '/burgers'}).exec(function (err, itemDishes) {
             CategoryModel.find({}).exec(function (err, categories) {
                 if (err) return next(err);
-                console.log(req.query.whoIsIt);
                 //Если не существует заказа в сессии, или если мы зашли на другой сервис,
                 // то создаем новую сессию, иначе берем старую
                 if (!req.session.cart) {
@@ -23,7 +21,6 @@ module.exports = function (req, res, next) {
                             whoIsIt: 'owner'
                         };
                     } else if (req.query.whoIsIt + '' == 'fickleOwner') {
-                        console.log('fickleOwner');
                         req.session.cart = {
                             orders: order.orders,
                             orderId: req.query.orderId,
