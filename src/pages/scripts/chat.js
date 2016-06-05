@@ -14,7 +14,9 @@
         room = $(this).closest('.session').find('.session_id').val();
         socket.emit('join', room, function (messages) {
             messages.forEach(function (message) {
-                if (moment(message.time).dayOfYear() > moment().dayOfYear() - 1) {
+                if (moment().get('date') == moment(message.time).get('date') &&
+                    moment().get('year') == moment(message.time).get('year')) {
+
                     printMessage(message.author.name, message.text,
                         message.author.avatar, moment(message.time).format('h:mm'));
                 } else {
@@ -112,5 +114,4 @@
             text: time
         }).appendTo(message);
     }
-
 })();
