@@ -121,8 +121,6 @@ module.exports = function (server) {
                 time: moment(),
                 room: data.room
             });
-
-            console.log(messageModel);
             
             messageModel.save(function () {
                 socket.to(data.room).emit('message', username, data.text, avatar, time);
