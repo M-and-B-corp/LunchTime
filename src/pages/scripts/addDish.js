@@ -1,5 +1,5 @@
 'use strict';
-(function () {
+var sendForm = function () {
     var link = $('.menu-item__link');
     link.on('click', sendForm);
 
@@ -87,4 +87,6 @@
             "class": "order__icon order__icon_more"
         }).appendTo(order__more);
     }
-})();
+    
+    return sendForm;
+}();

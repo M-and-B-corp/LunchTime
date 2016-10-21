@@ -33,7 +33,7 @@ function findAndSaveDishes(category) {
                         image: $(this).find('img').attr('src'),
                         description: $(this).find('.views-field-field-text div').text(),
                         uselfulness: $(this).find('.views-field-field-text2 div').text(),
-                        _serviceId: new mongoose.Types.ObjectId("573a19dad7113a722fbbc0e1")
+                        _serviceId: new mongoose.Types.ObjectId("58092a74c8cfd55f5a8089a9")
                         //TODO: Поставить id в зависимости от сервиса
                     });
                 }
@@ -51,7 +51,7 @@ function findAndSaveDishes(category) {
 
 module.exports = function () {
     console.log('seed loading start');
-    new Promise(function (resolve) {
+    return new Promise(function (resolve) {
         CategoryModel.remove({}, function () {
             DishModel.remove({}, function () {
                 return resolve();
