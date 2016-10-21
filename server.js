@@ -53,8 +53,6 @@ app.set('view engine', 'jade');
 app.set('views', './src/pages');
 
 
-app.use(errorLogger);
-app.use(errorHandler);
 app.use(express.static(__dirname + '/dist'));
 
 //already last(error processing)
@@ -63,7 +61,9 @@ app.use(function (req, res) {
 });
 
 var server = app.listen(process.env.PORT || 3000, '0.0.0.0', function () {
-    console.log('Working ' + this.port);
+    let port = process.env.PORT || 3000;
+
+    console.log('Working: ' + port);
 });
 
 require('./src/socket')(server);

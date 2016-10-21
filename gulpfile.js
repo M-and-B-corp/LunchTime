@@ -10,7 +10,8 @@ var gulp = require('gulp'),
     autoprefixer = require('gulp-autoprefixer'),
     htmlmin = require('gulp-htmlmin'),
     parse = require('./src/middleware/parser'),
-    mongoose = require('mongoose');
+    mongoose = require('mongoose'),
+    seed = require('./src/sites/seed');
 
 gulp.task('fonts', function () {
     return gulp.src('./src/fonts/*.ttf')
@@ -74,12 +75,18 @@ gulp.task('webserver', function () {
         }));
 });
 
-gulp.task('parse', function () {
-
+gulp.task('parse', function (next) {
     mongoose.connect('mongodb://localhost/lenka');
-    parse();
-    //FIXME: Сделать так чтобы задача завершалась без CTRL+C
+
+    parse(next);
+
 });
 
-gulp.task('default', ['stylus', 'jade', 'watch', 'webserver', 'img', 'fonts']);
+gulp.task('seedServices', (next) =>  {
+    mongoose.connect('mongodb://localhost/lenka');
+
+    seed();
+});
+
+gulp.task('default', ['stylus', 'jade', 'watch', 'img', 'fonts', 'webserver']);
 
